@@ -739,7 +739,7 @@ function viewQuestion(q){
   return `
     <div class="qpage">
       <div class="q-top">
-        <a class="q-back" href="#/">← 그리드로</a>
+        <a class="q-back" href="#/">← 문항 선택으로</a>
         <div class="q-nav">
           ${prev ? `<a href="#/q/${prev.id}">← ${prev.id}</a>` : `<span class="disabled">← 이전</span>`}
           ${next ? `<a href="#/q/${next.id}">${next.id} →</a>` : `<span class="disabled">다음 →</span>`}
@@ -1091,7 +1091,7 @@ function viewScoreboard(){
   }).join("");
 
   return `
-    <div class="q-top"><a class="q-back" href="#/">← 그리드로</a><span></span></div>
+    <div class="q-top"><a class="q-back" href="#/">← 문항 선택으로</a><span></span></div>
     <h1 class="page-title">점수판</h1>
     <p class="page-sub">푼 문항 ${solvedCount} / ${QUESTIONS.length} · 합계 ${scores.reduce((a,b)=>a+b,0)}점</p>
     <div class="sb-list">${list}</div>
