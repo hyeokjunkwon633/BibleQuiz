@@ -217,6 +217,12 @@
   }
   .modal h3{margin:0 0 4px;font-size:18px}
   .modal p{margin:0 0 18px;font-size:13.5px;color:var(--text-muted)}
+  .score-pick{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+  .score-pick button{
+    border:1px solid var(--border);background:var(--bg);border-radius:6px;padding:6px 13px;font-weight:700;font-size:13px
+  }
+  .score-pick button:hover{background:var(--hover)}
+  .score-pick button.on{background:var(--text);color:#fff;border-color:var(--text)}
   .team-pick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
   .team-pick button{
     border:1px solid var(--border);border-radius:8px;padding:12px;font-size:15px;font-weight:700;background:var(--bg);
@@ -558,7 +564,7 @@ function teamScores(){
   const s = new Array(state.teamCount).fill(0);
   for(const [qid,rec] of Object.entries(state.solved)){
     const q = QMAP[qid];
-    if(q && rec && rec.team < state.teamCount) s[rec.team] += q.tier;
+    if(q && rec && rec.team < state.teamCount) s[rec.team] += (rec.score ?? q.tier);
   }
   return s;
 }
@@ -622,7 +628,7 @@ function viewGrid(){
       const rec = state.solved[q.id];
       if(rec && rec.team < state.teamCount){
         return `<a class="qtile solved" href="#/q/${q.id}">
-          <span class="solvedtag">✓ ${esc(state.names[rec.team])} +${q.tier}</span>
+          <span class="solvedtag">✓ ${esc(state.names[rec.team])} +${rec.score ?? q.tier}</span>
         </a>`;
       }
       return `<a class="qtile" href="#/q/${q.id}">
@@ -676,7 +682,7 @@ function viewQuestion(q){
   let solvedBanner = "";
   if(rec && rec.team < state.teamCount){
     solvedBanner = `<div class="solved-banner" style="background:${TEAM_COLORS[rec.team]}">
-      ✓ ${esc(state.names[rec.team])} 정답 처리됨 (+${q.tier}점)
+      ✓ ${esc(state.names[rec.team])} 정답 처리됨 (+${rec.score ?? q.tier}점)
     </div>`;
   }
 
@@ -744,6 +750,17 @@ function initQuestion(q){
    ============================================================ */
 function openAwardModal(q){
   const rec = state.solved[q.id];
+  const maxScore = q.tier;
+  const scoreOptions = [];
+  for(let s = maxScore; s >= 10; s -= 10) scoreOptions.push(s);
+  const defaultScore = (rec && scoreOptions.includes(rec.score)) ? rec.score : maxScore;
+
+  const scorePickHtml = scoreOptions.length > 1
+    ? `<div class="score-pick" id="scorePick">
+        ${scoreOptions.map(s => `<button data-score="${s}" class="${s===defaultScore?"on":""}">${s}점</button>`).join("")}
+      </div>`
+    : "";
+
   const teamBtns = state.names.slice(0, state.teamCount).map((n,i) =>
     `<button data-team="${i}" ${rec && rec.team===i ? 'style="outline:2px solid '+TEAM_COLORS[i]+';outline-offset:-1px"' : ""}>
       <span class="dot" style="background:${TEAM_COLORS[i]}"></span>${esc(n)}
@@ -755,7 +772,8 @@ function openAwardModal(q){
     <div class="modal-back" id="modalBack">
       <div class="modal">
         <h3>정답을 맞춘 조 선택</h3>
-        <p>문항 ${q.id} · ${q.tier}점 — 선택한 조에 <b>${q.tier}점</b>이 부여됩니다.</p>
+        <p>문항 ${q.id} · 최대 ${maxScore}점${scoreOptions.length > 1 ? " — 점수를 고른 뒤 조를 선택하세요." : " — 조를 선택하면 부여됩니다."}</p>
+        ${scorePickHtml}
         <div class="team-pick">${teamBtns}</div>
         <div class="modal-actions">
           ${undo}
@@ -771,11 +789,17 @@ function openAwardModal(q){
     delete state.solved[q.id]; saveState(); closeModal(); render();
     toast(`${q.id} 정답 처리 취소`);
   });
+  document.querySelectorAll(".score-pick button").forEach(b =>
+    b.addEventListener("click", () => {
+      document.querySelectorAll(".score-pick button").forEach(x => x.classList.remove("on"));
+      b.classList.add("on");
+    }));
   document.querySelectorAll(".team-pick button").forEach(b =>
     b.addEventListener("click", () => {
       const t = parseInt(b.dataset.team,10);
-      state.solved[q.id] = { team:t }; saveState(); closeModal(); render();
-      toast(`${esc(state.names[t])}  +${q.tier}점`);
+      const chosen = parseInt(document.querySelector(".score-pick button.on")?.dataset.score, 10) || maxScore;
+      state.solved[q.id] = { team:t, score:chosen }; saveState(); closeModal(); render();
+      toast(`${esc(state.names[t])}  +${chosen}점`);
     }));
 }
 function closeModal(){
