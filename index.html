@@ -118,8 +118,8 @@
   /* ---------- question page ---------- */
   .qpage{flex:1;min-height:0;display:flex;flex-direction:column}
   .q-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;flex-shrink:0}
-  .q-back{font-size:13px;color:var(--text-muted);text-decoration:none}
-  .q-back:hover{color:var(--text)}
+  .q-back{font-size:15px;font-weight:700;color:#fff;background:var(--text);text-decoration:none;padding:8px 16px;border-radius:8px;box-shadow:var(--shadow)}
+  .q-back:hover{opacity:.85}
   .q-nav{display:flex;gap:6px}
   .q-nav a,.q-nav span{
     font-size:13px;padding:3px 10px;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--text)
@@ -511,7 +511,7 @@ const QUESTIONS = [
     src:`혁준 탭 5행 · 19장` },
 
   { id:"40-5", tier:40, type:`릴레이 단답(4가지, 팀 협동)`,
-    q:`잠언 23장 23절 "진리를 사되 팔지는 말며 지혜와 훈계와 명철도 그리할지니라." 사되 팔지는 말아야 하는 네 가지를 차례대로 말하시오.`,
+    q:`잠언 23장 23절에서 말하는 사되 팔지는 말아야 하는 네 가지를 차례대로 말하시오.`,
     a:`진리 → 지혜 → 훈계 → 명철`,
     coop:`팀원 네 명이 한 단어씩 차례대로 말해야 인정. 원본 배점 규칙은 "맞춘 개수대로 10~40점 부여(4개 다 맞히면 40점)"로, 이 문항만 고정 40점이 아니라 가변 배점이니 진행 전 별도 공지가 필요합니다.`,
     refs:[`잠언 23:23`],
