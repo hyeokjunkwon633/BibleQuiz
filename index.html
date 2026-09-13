@@ -139,6 +139,7 @@
     text-align:center;max-width:1050px
   }
   .q-text.long{font-size:clamp(19px,2.3vw,28px);line-height:1.55}
+  .q-choices{display:block;text-align:left;margin-top:.6em}
   .q-explain{flex-shrink:0;max-height:24vh;overflow:auto;margin-top:8px;display:flex;flex-direction:column;gap:6px}
   .coop-box{
     border-left:3px solid var(--t40);background:var(--t40bg);border-radius:0 8px 8px 0;
@@ -752,7 +753,7 @@ function viewQuestion(q){
       </div>
 
       <div class="q-main">
-        ${isConnect ? renderConnectUI(connectParsed) : `<div class="q-text${q.q.length > 110 ? " long" : ""}">${esc(q.q)}</div>`}
+        ${isConnect ? renderConnectUI(connectParsed) : `<div class="q-text${q.q.length > 110 ? " long" : ""}">${renderQBlock(q.q)}</div>`}
         ${imagesHtml}
       </div>
 
@@ -800,6 +801,18 @@ function initQuestion(q){
    연결형 문항 — 드래그/터치로 선 잇기
    ============================================================ */
 const CONNECT_COLORS = ["#2383e2","#0f9d58","#d9730d","#9333ea","#e03e3e","#0d9488","#c2185b"];
+
+// q.q 텍스트에서 마지막 블록이 ①②③④... 선지 목록이면 좌측정렬 블록으로 분리
+function renderQBlock(text){
+  const blocks = String(text).split(/\n\n+/);
+  const last = blocks[blocks.length-1];
+  const lines = last.split("\n").filter(l => l.trim());
+  if(blocks.length > 1 && lines.length && lines.every(l => /^[①-⑩]/.test(l))){
+    const intro = blocks.slice(0,-1).join("\n\n");
+    return `${esc(intro)}<div class="q-choices">${esc(lines.join("\n"))}</div>`;
+  }
+  return esc(text);
+}
 
 // q.q 텍스트를 "설명 / ①②③④... / ㄱㄴㄷㄹ..." 세 블록으로 분리
 function parseConnectQ(text){
