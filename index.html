@@ -1,0 +1,920 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>2026 전교인 성경퀴즈대회</title>
+<style>
+  :root{
+    --bg:#ffffff;
+    --text:#37352f;
+    --text-muted:#9b9a97;
+    --border:#e9e9e7;
+    --hover:#f5f5f4;
+    --sidebar:#fbfbfa;
+    --shadow:0 1px 3px rgba(15,15,15,.08), 0 3px 12px rgba(15,15,15,.06);
+    --radius:8px;
+    --t10:#2383e2; --t10bg:#eaf3fc;
+    --t20:#0f9d58; --t20bg:#e8f5ee;
+    --t30:#d9730d; --t30bg:#faecdf;
+    --t40:#9333ea; --t40bg:#f3e8fd;
+    --t50:#e03e3e; --t50bg:#fce8e8;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;height:100%;overflow:hidden}
+  body{
+    font-family:"Apple SD Gothic Neo","Pretendard","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    color:var(--text);
+    background:var(--bg);
+    font-size:15px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  button{font-family:inherit;cursor:pointer}
+  a{color:inherit}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    height:46px;
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 18px;
+    position:sticky;top:0;background:var(--bg);z-index:50;
+  }
+  .topbar .left{font-weight:700;font-size:15px;letter-spacing:-.01em}
+  .topbar .right{font-size:13px;color:var(--text-muted)}
+
+  /* ---------- shell ---------- */
+  .shell{display:flex;height:calc(100vh - 46px);overflow:hidden}
+  .sidebar{
+    width:52px;flex-shrink:0;background:var(--sidebar);
+    border-right:1px solid var(--border);padding:10px 6px;
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+  }
+  .sidebar .nav-item{
+    display:flex;align-items:center;justify-content:center;
+    width:40px;height:40px;border-radius:8px;color:var(--text);
+    text-decoration:none;font-size:19px;
+  }
+  .sidebar .nav-item:hover{background:var(--hover)}
+  .sidebar .nav-item.active{background:#eceae7}
+  .content{flex:1;min-width:0;height:100%;overflow:hidden;display:flex;flex-direction:column;padding:18px 28px;max-width:1500px;margin:0 auto;width:100%}
+  .content.scrollable{overflow-y:auto;padding:26px 34px 40px;display:block}
+
+  h1.page-title{font-size:21px;font-weight:800;letter-spacing:-.02em;margin:0 0 10px;flex-shrink:0}
+  .page-sub{color:var(--text-muted);margin:0 0 12px;font-size:13px;flex-shrink:0}
+
+  /* ---------- grid ---------- */
+  .grid-cols{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;flex:1;min-height:0}
+  .tier-col{min-width:0;min-height:0;display:grid;grid-template-rows:24px repeat(6,1fr);gap:8px}
+  .tier-head{
+    font-weight:700;font-size:12px;border-radius:6px;text-align:center;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .t-10 .tier-head{background:var(--t10bg);color:var(--t10)}
+  .t-20 .tier-head{background:var(--t20bg);color:var(--t20)}
+  .t-30 .tier-head{background:var(--t30bg);color:var(--t30)}
+  .t-40 .tier-head{background:var(--t40bg);color:var(--t40)}
+  .t-50 .tier-head{background:var(--t50bg);color:var(--t50)}
+
+  .qtile{
+    border:1px solid rgba(0,0,0,.06);border-radius:var(--radius);
+    padding:6px 8px;overflow:hidden;min-height:0;gap:3px;
+    transition:box-shadow .12s, filter .12s, transform .05s;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+    text-decoration:none;color:#fff;
+  }
+  .t-10 .qtile{background:var(--t10)}
+  .t-20 .qtile{background:var(--t20)}
+  .t-30 .qtile{background:var(--t30)}
+  .t-40 .qtile{background:var(--t40)}
+  .t-50 .qtile{background:var(--t50)}
+  .qtile:hover{box-shadow:var(--shadow);filter:brightness(1.07)}
+  .qtile:active{transform:translateY(1px)}
+  .qtile .qnum{font-size:clamp(26px,6vh,46px);font-weight:800;line-height:1;letter-spacing:-.01em;flex-shrink:0}
+  .qtile.solved{background:#fff;color:var(--text);border-color:var(--border);filter:none}
+  .qtile.solved:hover{filter:none;box-shadow:var(--shadow)}
+  .qtile .solvedtag{
+    font-size:clamp(15px,2.6vh,22px);font-weight:800;line-height:1.25;flex-shrink:0;color:var(--text);
+    max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+  }
+
+  /* ---------- mini scoreboard ---------- */
+  .mini-wrap{flex-shrink:0;margin-top:12px}
+  .mini-scoreboard{
+    border:1px solid var(--border);border-radius:10px;padding:8px 12px;
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;cursor:pointer;
+    background:var(--sidebar);transition:box-shadow .12s,border-color .12s;
+  }
+  .mini-scoreboard:hover{box-shadow:var(--shadow);border-color:#d3d2ce}
+  .mini-scoreboard .mlabel{font-size:12px;color:var(--text-muted);font-weight:600;margin-right:4px}
+  .mchip{display:flex;align-items:center;gap:6px;font-size:13px;padding:3px 10px;border-radius:20px;background:var(--bg);border:1px solid var(--border)}
+  .mchip .msc{font-weight:800}
+  .mchip.lead{border-color:#f2c94c;box-shadow:0 0 0 2px #f9e9b8 inset}
+  .mini-hint{margin-left:auto;font-size:12px;color:var(--text-muted)}
+
+  /* ---------- question page ---------- */
+  .qpage{flex:1;min-height:0;display:flex;flex-direction:column}
+  .q-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;flex-shrink:0}
+  .q-back{font-size:13px;color:var(--text-muted);text-decoration:none}
+  .q-back:hover{color:var(--text)}
+  .q-nav{display:flex;gap:6px}
+  .q-nav a,.q-nav span{
+    font-size:13px;padding:3px 10px;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--text)
+  }
+  .q-nav a:hover{background:var(--hover)}
+  .q-nav .disabled{opacity:.4;pointer-events:none}
+
+
+  .q-meta{display:flex;gap:6px;align-items:center;margin-bottom:8px;flex-wrap:wrap;flex-shrink:0}
+  .q-badge{font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px}
+  .q-badge.tier{color:#fff}
+  .q-badge.type{background:var(--hover);color:var(--text)}
+  .q-badge.src{background:transparent;color:var(--text-muted);font-weight:500}
+
+  .q-main{flex:1;min-height:0;overflow:auto;display:flex;align-items:center;justify-content:center;padding:10px 0}
+  .q-text{
+    font-size:clamp(24px,3.6vw,44px);font-weight:700;line-height:1.5;white-space:pre-wrap;
+    text-align:center;max-width:1050px
+  }
+  .q-text.long{font-size:clamp(19px,2.3vw,28px);line-height:1.55}
+  .q-explain{flex-shrink:0;max-height:24vh;overflow:auto;margin-top:8px;display:flex;flex-direction:column;gap:6px}
+  .coop-box{
+    border-left:3px solid var(--t40);background:var(--t40bg);border-radius:0 8px 8px 0;
+    padding:10px 14px;font-size:13.5px;white-space:pre-wrap
+  }
+  .coop-box b{color:var(--t40)}
+  .src-note{font-size:12px;color:var(--text-muted)}
+  .q-images{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px}
+  .q-images img{max-height:34vh;max-width:100%;border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow);object-fit:contain;background:#fff}
+
+  .answer-row{
+    display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:10px;
+    padding-top:12px;border-top:1px solid var(--border);flex-shrink:0
+  }
+  .reveal-btn{
+    font-size:12px;color:var(--text-muted);background:transparent;border:1px dashed var(--border);
+    border-radius:6px;padding:6px 12px
+  }
+  .reveal-btn:hover{background:var(--hover);color:var(--text)}
+  .award-btn{
+    font-size:15px;font-weight:700;color:#fff;background:var(--t20);border:none;border-radius:8px;
+    padding:10px 20px;box-shadow:var(--shadow)
+  }
+  .award-btn:hover{filter:brightness(.96)}
+  .award-btn.undo{background:var(--bg);color:var(--t50);border:1px solid var(--t50);box-shadow:none}
+
+  .modal.answer-modal{width:min(640px,92vw);text-align:center}
+  .answer-modal .alabel{font-size:12px;font-weight:800;color:var(--t20);letter-spacing:.08em}
+  .answer-modal .atext{font-size:clamp(24px,3vw,34px);font-weight:800;margin:8px 0 16px;white-space:pre-wrap;line-height:1.45}
+  .answer-modal .refs{font-size:14px;color:#555;line-height:1.7;text-align:left;background:var(--hover);border-radius:8px;padding:10px 14px}
+  .answer-modal .refs div{padding:2px 0}
+  .answer-modal .note{margin-top:10px;font-size:12.5px;color:var(--text-muted);white-space:pre-wrap;text-align:left}
+  .answer-modal .modal-actions{justify-content:center;margin-top:16px}
+
+  .solved-banner{
+    margin-top:8px;font-size:13.5px;font-weight:700;padding:8px 14px;border-radius:8px;color:#fff;
+    display:flex;align-items:center;gap:8px;flex-shrink:0
+  }
+
+  /* ---------- scoreboard page ---------- */
+  .sb-list{display:flex;flex-direction:column;gap:14px;margin-top:10px}
+  .sb-row{display:flex;align-items:center;gap:18px}
+  .sb-rank{font-size:22px;font-weight:800;width:44px;text-align:center;color:var(--text-muted)}
+  .sb-rank.r1{color:#e0a80d}.sb-rank.r2{color:#9b9a97}.sb-rank.r3{color:#c07f43}
+  .sb-main{flex:1;min-width:0}
+  .sb-name{font-size:17px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .sb-bar-track{height:20px;background:var(--hover);border-radius:20px;margin-top:6px;overflow:hidden}
+  .sb-bar{height:100%;border-radius:20px;transition:width .5s ease}
+  .sb-score{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;min-width:90px;text-align:right}
+
+  /* ---------- settings ---------- */
+  .set-block{border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:18px;max-width:640px}
+  .set-block h3{margin:0 0 4px;font-size:16px}
+  .set-block p.hint{margin:0 0 16px;font-size:13px;color:var(--text-muted)}
+  .count-btns{display:flex;gap:6px;margin-bottom:18px}
+  .count-btns button{border:1px solid var(--border);background:var(--bg);border-radius:6px;padding:6px 14px;font-weight:700}
+  .count-btns button.on{background:var(--text);color:#fff;border-color:var(--text)}
+  .team-input-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .team-input-row .dot{width:12px;height:12px;border-radius:50%;flex-shrink:0}
+  .team-input-row input{
+    flex:1;border:1px solid var(--border);border-radius:6px;padding:7px 10px;font-size:14px;font-family:inherit
+  }
+  .team-input-row input:focus{outline:2px solid var(--t10);outline-offset:-1px}
+  .team-input-row.off{opacity:.35}
+  .btn{border:1px solid var(--border);background:var(--bg);border-radius:6px;padding:8px 16px;font-weight:600;font-size:14px}
+  .btn:hover{background:var(--hover)}
+  .btn.primary{background:var(--text);color:#fff;border-color:var(--text)}
+  .btn.danger{color:var(--t50);border-color:#f0c9c9}
+  .btn.danger:hover{background:var(--t50bg)}
+
+  /* ---------- modal ---------- */
+  .modal-back{
+    position:fixed;inset:0;background:rgba(15,15,15,.4);display:flex;align-items:center;justify-content:center;z-index:100
+  }
+  .modal{
+    background:var(--bg);border-radius:14px;padding:24px;width:min(440px,92vw);box-shadow:var(--shadow)
+  }
+  .modal h3{margin:0 0 4px;font-size:18px}
+  .modal p{margin:0 0 18px;font-size:13.5px;color:var(--text-muted)}
+  .team-pick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .team-pick button{
+    border:1px solid var(--border);border-radius:8px;padding:12px;font-size:15px;font-weight:700;background:var(--bg);
+    display:flex;align-items:center;gap:8px;justify-content:center
+  }
+  .team-pick button:hover{background:var(--hover)}
+  .team-pick button .dot{width:12px;height:12px;border-radius:50%}
+  .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:16px}
+
+  /* ---------- toast ---------- */
+  .toast{
+    position:fixed;left:50%;bottom:30px;transform:translateX(-50%);
+    background:var(--text);color:#fff;padding:10px 20px;border-radius:24px;font-size:14px;font-weight:600;
+    z-index:200;box-shadow:var(--shadow);animation:toastin .2s ease
+  }
+  @keyframes toastin{from{opacity:0;transform:translate(-50%,10px)}}
+
+  .kbd-hint{font-size:11px;color:var(--text-muted);flex-shrink:0;margin-top:6px;text-align:center}
+  .kbd-hint kbd{
+    border:1px solid var(--border);border-bottom-width:2px;border-radius:4px;padding:1px 5px;font-family:inherit;font-size:10px;background:var(--sidebar)
+  }
+
+  @media(max-width:900px){
+    .content{padding:14px 14px}
+    .grid-cols{grid-template-columns:repeat(3,1fr)}
+    .tier-col{grid-template-rows:22px repeat(6,minmax(56px,1fr))}
+  }
+
+  @media(max-width:640px){
+    html,body{height:auto;overflow:auto}
+    .topbar{padding:0 12px}
+    .topbar .left{font-size:14px}
+    .topbar .right{font-size:11px}
+    .shell{display:block;height:auto;overflow:visible;padding-bottom:calc(58px + env(safe-area-inset-bottom))}
+    .sidebar{
+      position:fixed;left:0;right:0;bottom:0;width:auto;z-index:60;
+      flex-direction:row;justify-content:space-around;
+      border-right:none;border-top:1px solid var(--border);
+      padding:6px 8px calc(6px + env(safe-area-inset-bottom))
+    }
+    .sidebar .nav-item{width:48px;height:44px;font-size:21px}
+    .content,.content.scrollable{height:auto;overflow:visible;display:block;padding:12px 10px 20px}
+    .grid-cols{grid-template-columns:repeat(5,1fr);gap:5px}
+    .tier-col{grid-template-rows:22px repeat(6,58px);gap:5px}
+    .tier-head{font-size:11px}
+    .qtile{padding:4px 2px;border-radius:6px}
+    .qtile .qnum{font-size:24px}
+    .qtile .solvedtag{font-size:11px;white-space:normal;line-height:1.2;word-break:keep-all}
+    .mini-hint{display:none}
+    .mchip{font-size:12px;padding:2px 8px}
+    .qpage{display:block}
+    .q-main{overflow:visible;padding:18px 0}
+    .q-text{font-size:21px}
+    .q-text.long{font-size:17px}
+    .q-explain{max-height:none}
+    .q-images img{max-height:none;width:100%}
+    .answer-row{flex-direction:column-reverse;align-items:stretch;gap:8px}
+    .award-btn{width:100%;padding:13px}
+    .reveal-btn{padding:10px}
+    .kbd-hint{display:none}
+    .sb-row{gap:10px}
+    .sb-rank{font-size:18px;width:30px}
+    .sb-name{font-size:15px}
+    .sb-score{font-size:22px;min-width:50px}
+    .set-block{padding:16px 14px}
+    .count-btns{flex-wrap:wrap}
+    .modal{padding:18px}
+    .answer-modal .atext{font-size:22px}
+    .answer-modal .refs{max-height:40vh;overflow:auto}
+    .toast{bottom:calc(76px + env(safe-area-inset-bottom));max-width:90vw;text-align:center}
+  }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="left">2026 전교인 성경퀴즈대회</div>
+  <div class="right">꿈꾸는교회 청년부</div>
+</div>
+<div class="shell">
+  <nav class="sidebar" id="sidebar"></nav>
+  <main class="content" id="app"></main>
+</div>
+<div id="overlay"></div>
+<div id="toast"></div>
+
+<script>
+/* ============================================================
+   문항 데이터 — 성경퀴즈대회 2026 배점별 최종 문항(10~50점, 각 6문항)
+   출처: "성경퀴즈대회 문항 최종_정리.md" 문제은행에서 선정
+   (quiz_questions_10to50.js 의 SELECTED_QUESTIONS 를 그대로 반영함)
+
+   ※ 검수 필요 문항:
+     · 50-4: 문제 형식 추후 확정 필요
+     · 50-5: ㄷ·ㄹ 항목(구절·정답) 미기재 — 추후 보완 필요
+     · 50-6: 정답이 원본에 기재되어 있지 않음 — 확정 필요
+   ============================================================ */
+const QUESTIONS = [
+
+  /* ---------------- 10점 (6/6 확보) ---------------- */
+  { id:"10-1", tier:10, type:`OX퀴즈`,
+    q:`28장 1절의 "악인은 쫓아오는 자가 없어도 도망하나 의인은 사자 같이 담대하리라"는 악인의 소심함을 꾸짖고, 의인의 용맹함을 칭찬하고 있다. (O / X)`,
+    a:`X`,
+    refs:[`잠언 28:1 "악인은 쫓아오는 자가 없어도 도망하나 의인은 사자 같이 담대하리라"`,
+          `해설: 악인이 소심하고 의인이 용기롭다는 뜻이 아니라, 의인은 하나님 앞에 살기 때문에 담대하다는 의미`],
+    src:`예성 탭 4번` },
+
+  { id:"10-2", tier:10, type:`단답형`,
+    q:`잠언에서 무엇이 지식의 근본이라고 하나요?`,
+    a:`여호와를 경외하는 것`,
+    refs:[`잠언 1:7`],
+    src:`민주 탭 25번` },
+
+  { id:"10-3", tier:10, type:`단답형`,
+    q:`잠언 20장 15절에는 금과 진주보다 귀한 보배가 있다고 말합니다. 그 보배는 무엇인가요?`,
+    a:`지혜의 입술`,
+    refs:[`잠언 20:15`],
+    src:`혁준 탭 7행 · 20:15` },
+
+  { id:"10-4", tier:10, type:`빈칸 채우기(4지선다)`,
+    q:`"마땅히 행할 길을 아이에게 가르치라 그리하면 (   )" 빈칸에 들어갈 말로 알맞은 것은?\n\n① 늙어도 그것을 떠나지 아니하리라   ② 그의 길이 평탄하게 되리라   ③ 그가 장수하며 부하게 되리라   ④ 여호와께서 그의 소원을 이루어 주시리라`,
+    a:`① 늙어도 그것을 떠나지 아니하리라`,
+    refs:[`잠언 22:6`],
+    src:`혁준 탭 12행 · 22:6` },
+
+  { id:"10-5", tier:10, type:`4지선다`,
+    q:`잠언 9장에서 지혜가 마련한 집 기둥의 개수는?\n\n① 4개   ② 5개   ③ 7개   ④ 12개   ⑤ 100개`,
+    a:`③ 7개`,
+    refs:[`잠언 9:1 "지혜가 그의 집을 짓고 일곱 기둥을 다듬고"`],
+    src:`은아 탭 4행 · 9:1` },
+
+  { id:"10-6", tier:10, type:`단답형`,
+    q:`잠언을 히브리어로 뭐라고 하나요?`,
+    a:`마샬 (연상: 마샬 스피커)`,
+    refs:[`(원본 출처 미기재)`],
+    src:`성도님들 탭 1번` },
+
+  /* 그 외 10점 후보(미채택, 필요 시 교체용): 예성 2번(그림 선택형·이미지 필수),
+     민주 26번, 혁준 39번, 은아 45번, 성도님들 49번 */
+
+  /* ---------------- 20점 (6/6 확보) ---------------- */
+  { id:"20-1", tier:20, type:`4지선다`,
+    q:`자녀가 잘못을 저질렀다. 잠언 13장의 가르침에 비추어 볼 때 자식을 사랑하는 부모의 행동은 무엇인가?\n\n① 부모의 뜻을 강요하기보다, 자녀 스스로 깨달을 때까지 기다려 준다.\n② 자녀의 잘못을 지적하지 않고 조용히 감싸 준다.\n③ 잘못에 대한 판단은 하나님께 맡기고 기도한다.\n④ 지체하지 말고 훈계하며 잘못을 고치도록 돕는다.`,
+    a:`④ 지체하지 말고 훈계하며 잘못을 고치도록 돕는다.`,
+    refs:[`잠언 13장`],
+    src:`예은 탭 1번` },
+
+  { id:"20-2", tier:20, type:`5지선다`,
+    q:`잠언에 나오는 '면류관'에 대한 내용 중 아닌 것은?\n\n① 영화의 면류관   ② 생명의 면류관   ③ 지식의 면류관   ④ 노인의 면류관   ⑤ 지아비의 면류관`,
+    a:`② 생명의 면류관 (잠언에는 없고 야고보서 1:12, 요한계시록 2:10 등에 나옴)`,
+    refs:[`16:31 영화의 면류관`, `17:6 노인의 면류관`, `14:18 지식의 면류관`, `12:4 지아비의 면류관`],
+    src:`예은 탭 8번` },
+
+  { id:"20-3", tier:20, type:`빈칸 채우기(5지선다)`,
+    q:`"정녕히 재물은 스스로 날개를 내어 하늘을 나는 (   )처럼 날아가리라" 빈칸에 들어갈 말로 가장 알맞은 것은?\n\n① 비둘기   ② 참새   ③ 독수리   ④ 닭   ⑤ 메추라기`,
+    a:`③ 독수리`,
+    refs:[`잠언 23:5`],
+    src:`혁준 탭 17행 · 23:5` },
+
+  { id:"20-4", tier:20, type:`상황 판단형(4지선다)`,
+    q:`어떤 사람이 굶주려 배를 채우려고 도둑질을 했다. 이 사람이 들키면 어떤 일이 일어나는가?\n\n① 불쌍하니 사람들에게 용서받는다   ② 훔친 것의 두 배를 갚아야 한다   ③ 칠 배를 갚고, 자기 집의 것을 다 내줄 수도 있다   ④ 다시는 도둑질하지 않겠다고 약속하면 벌을 면한다`,
+    a:`③ 칠 배를 갚고, 자기 집의 것을 다 내줄 수도 있다`,
+    refs:[`잠언 6:30-31`],
+    src:`민주 탭 31번 (원본은 그림 텍스트상자 문항, 문구를 그대로 옮김)` },
+
+  { id:"20-5", tier:20, type:`단답형`,
+    q:`말씀에서 '이것'을 네 손가락에 매며 '이것'을 네 마음판에 새기라. 그리하면 '이것'이 너를 지켜서 음녀에게, 말로 호리는 이방 여인에게 빠지지 않게 하리라. '이것'이 가리키는 것은?`,
+    a:`계명`,
+    refs:[`잠언 7:1-5`],
+    src:`은아 탭 2행 · 7:3` },
+
+  { id:"20-6", tier:20, type:`상황 판단형`,
+    q:`다음은 잠언을 읽은 갑, 을, 병의 대화이다.\n갑: 누군가 나에게 수욕을 느끼게 한다면, 즉시 화를 낼거야.\n을: 이웃이 곤란한 처지에 놓인다면, 그를 위해 거짓말을 할거야.\n병: 내 행동이나 말이 틀렸을 수 있다고 생각하고 다른 사람들의 비판을 수용해야겠다고 다짐했어.\n갑, 을, 병 중 잠언을 잘 이해한 사람은?`,
+    a:`병`,
+    refs:[`잠언 12:15-22`],
+    src:`은아 탭 7행 · 12장` },
+
+  /* 그 외 20점 후보(미채택): 예은 9번, 민주 30번,
+     예은 10번·혁준 32번(이미지 필수라 제외) */
+
+  /* ---------------- 30점 (6/6 확보) ---------------- */
+  { id:"30-1", tier:30, type:`5지선다`,
+    q:`잠언에서 '생명의 샘'이라고 표현된 것이 아닌 것은 무엇일까요?\n\n① 지혜 있는 자의 교훈   ② 여호와를 경외하는 것   ③ 의인의 입   ④ 명철   ⑤ 의인의 열매`,
+    a:`⑤ 의인의 열매 ("의인의 열매는 생명나무니라" — 11:30, 생명의 샘이 아님)`,
+    refs:[`13:14`, `14:27`, `10:11`, `16:22`, `11:30`],
+    src:`예은 탭 3번` },
+
+  { id:"30-2", tier:30, type:`4지선다`,
+    q:`잠언 15장의 말씀에 비추어 볼 때, 부적절한 삶의 모습에 해당하지 않는 것은?\n\n① 재물을 많이 소유한 것   ② 자신의 감정을 즉시 표현하는 것   ③ 준비될 때까지 행동을 미루는 것   ④ 다른 사람의 의견보다 자신의 판단을 우선하는 것`,
+    a:`① 재물을 많이 소유한 것 (재물이 많은 것 자체가 죄는 아님 — 15:16)`,
+    refs:[`잠언 15:16`],
+    src:`예은 탭 6번` },
+
+  { id:"30-3", tier:30, type:`5지선다`,
+    q:`잠언 25장 3절(하늘의 높음과 땅의 깊음 같이 왕의 마음은 헤아릴 수 없느니라)과 이사야 43장 18~19절(너희는 이전 일을 기억하지 말며…보라 내가 새 일을 행하리니)의 공통점으로 알맞은 것은?\n\n① 인간의 어리석음을 꾸짖고 있다   ② 하나님은 보이지 않아도 일하신다   ③ 왕의 변덕스러움과 대비되는 하나님의 전지전능하심을 나타낸다   ④ 사람이 현재의 상황만으로 앞으로 일어날 일을 판단해서는 안 된다고 말한다   ⑤ 인간이 이해할 수 없는 모든 일은 하나님의 뜻으로 받아들여야 한다고 가르친다`,
+    a:`②`,
+    refs:[`잠언 25:3`, `이사야 43:18-19`],
+    src:`예성 탭 1번` },
+
+  { id:"30-4", tier:30, type:`8지선다(정답 2개)`,
+    q:`26장 1~16절은 우리가 인생에서 멀리해야 하는 인물에 대해 가르치고 있습니다. 이때 우리가 멀리해야 하는 사람의 특징으로 잘못된 것은? (정답 2개)\n\n① 미련한 자는 능력이 부족하여 영예를 얻기에 합당하지 않다   ② 미련한 자는 귀가 좋지 않아 남의 말을 잘 듣지 못한다   ③ 미련한 자와 스스로를 지혜롭게 여기는 사람은 똑같이 해롭다   ④ 게으른 자는 나태하여 문제 발생시 원인을 찾는 것조차 귀찮아 한다   ⑤ 게으른 자는 스스로를 지혜롭게 여기는 사람이다   ⑥ 사람은 악하여 분란 일으키는 사람을 쫓아내도 또 다른 이가 등장한다   ⑦ 마음이 악한 사람은 겉으로도 그 악함이 드러난다   ⑧ 악한 사람은 자신의 악함으로 인해 결국 패망한다`,
+    a:`⑤, ⑧`,
+    refs:[`잠언 26장 (특히 16절)`],
+    src:`예성 탭 3번` },
+
+  { id:"30-5", tier:30, type:`순서 배열형`,
+    q:`다음 구절을 올바른 순서로 배열하시오.\n\nㄱ. 너는 범사에 그를 인정하라\nㄴ. 네 명철을 의지하지 말라\nㄷ. 그리하면 네 길을 지도하시리라\nㄹ. 너는 마음을 다하여 여호와를 신뢰하고`,
+    a:`ㄹ - ㄴ - ㄱ - ㄷ`,
+    refs:[`잠언 3:5-6`],
+    src:`민주 탭 27번` },
+
+  { id:"30-6", tier:30, type:`초성 퀴즈`,
+    q:`초성을 이용하여 잠언 8장 17절 말씀을 완성하세요. (한 글자도 틀리지 않아야 인정)\n\n"ㄴㄹ ㅅㄹㅎㄴ ㅈㄷㅇ ㄴㅇ ㅅㄹㅇ ㅇㅇㅁ ㄴㄹ ㄱㅈㅎ ㅊㄴ ㅈㄱ ㄴㄹ ㅁㄴ ㄱㅇㄴㄹ"`,
+    a:`나를 사랑하는 자들이 나의 사랑을 입으며 나를 간절히 찾는 자가 나를 만날 것이니라`,
+    refs:[`잠언 8:17`],
+    src:`은아 탭 3행 · 8:17` },
+    // ⚠ 참고: 기존 QUESTIONS의 20-5번이 같은 8:17 구절(빈칸 채우기 방식)을 이미 사용 중입니다.
+    // 두 문항을 함께 쓰면 같은 구절이 두 번 나오니, 하나는 교체를 권장합니다.
+
+  /* 그 외 30점 후보(미채택, 여유분): 예은 7번 */
+
+  /* ---------------- 40점 (⚠ 5/6만 확보, 1개 부족) ---------------- */
+  { id:"40-1", tier:40, type:`빈칸 채우기(공통 오답 찾기)`,
+    q:`다음 잠언 말씀의 빈칸에 공통으로 들어가는 말이 아닌 것은?\n\n① 입을 지키는 자는 자기의 (   )을/를 보전하나 입술을 크게 벌리는 자에게는 멸망이 오느니라 (13:3)\n② 여호와를 경외하는 자에게는 견고한 의뢰가 있나니 그 자녀들에게 (   )가/이 있으리라 (14:26)\n③ (   )의 경계를 듣는 귀는 지혜로운 자 가운데에 있느니라 (15:31)\n④ 왕의 희색은 (   )을/를 뜻하나니 그의 은택이 늦은 비를 내리는 구름과 같으니라 (16:15)\n⑤ 지혜있는 자의 교훈은 (   )의 샘이니 사망의 그물에서 벗어나게 하느니라 (13:14)`,
+    a:`② -피난처 (①③④⑤는 모두 "생명", ②만 "생명"이 아님)`,
+    refs:[`13:3`, `14:26`, `15:31`, `16:15`, `13:14`],
+    src:`예은 탭 2번` },
+
+  { id:"40-2", tier:40, type:`서술형(3가지 나열)`,
+    q:`"여호와를 경외하는 것은 생명의 샘이니 사망의 그물에서 벗어나게 하느니라." '경외한다'의 의미를 말하세요 (총 3가지)`,
+    a:`하나님을 하나님으로 인정해드린다 / 하나님을 하나님으로 존중한다 / 하나님의 말씀대로 순종한다`,
+    refs:[`잠언 14:27`],
+    src:`예은 탭 5번` },
+
+  { id:"40-3", tier:40, type:`연결형(4쌍)`,
+    q:`잠언 24~28절은 이것이 부족하나 지혜로운 동물 4종에 대해 말하고 있습니다. 각 동물별로 부족한 것을 옳게 연결하면?\n\n① 왕   ② 힘   ③ 날개   ④ 지혜\nㄱ. 개미   ㄴ. 사반   ㄷ. 메뚜기   ㄹ. 도마뱀`,
+    a:`① - ㄱ(개미)   ② - ㄴ(사반)   ③ - ㄷ(메뚜기)   ④ - ㄹ(도마뱀)`,
+    refs:[`잠언 30:24-28`],
+    src:`예성 탭 5번` },
+
+  { id:"40-4", tier:40, type:`연결형(4쌍)`,
+    q:`잠언 19장에 나오는 인물(행동)과 그에 따른 결과를 알맞게 연결하시오.\n\n① 노하기를 더디 하는 자   ② 거짓 증인   ③ 권고를 듣고 훈계를 받는 자   ④ 부모를 구박·쫓아내는 자식\nㄱ. 자기의 슬기와 영광이 됨   ㄴ. 벌을 면하지 못함   ㄷ. 지혜롭게 됨   ㄹ. 부끄러움과 능욕을 부름`,
+    a:`① - ㄱ   ② - ㄴ   ③ - ㄷ   ④ - ㄹ`,
+    refs:[`19:5`, `19:9`, `19:11`, `19:16`, `19:20`, `19:26`],
+    src:`혁준 탭 5행 · 19장` },
+
+  { id:"40-5", tier:40, type:`릴레이 단답(4가지, 팀 협동)`,
+    q:`잠언 23장 23절 "진리를 사되 팔지는 말며 지혜와 훈계와 명철도 그리할지니라." 사되 팔지는 말아야 하는 네 가지를 차례대로 말하시오.`,
+    a:`진리 → 지혜 → 훈계 → 명철`,
+    coop:`팀원 네 명이 한 단어씩 차례대로 말해야 인정. 원본 배점 규칙은 "맞춘 개수대로 10~40점 부여(4개 다 맞히면 40점)"로, 이 문항만 고정 40점이 아니라 가변 배점이니 진행 전 별도 공지가 필요합니다.`,
+    refs:[`잠언 23:23`],
+    src:`혁준 탭 15행 · 23:23` },
+
+  { id:"40-6", tier:40, type:`그림 순서 배열`,
+    q:`다음 중 잠언 24~28절은 지혜로운 동물 4종에 대해 말하고 있습니다. 이때 성경에서 언급된 순서대로 동물을 나열하면? (그림 1~4번을 순서대로 배열)`,
+    a:`1 → 2 → 3 → 4 (그림이 이미 정답 순서로 번호 매겨져 있음)`,
+    img:[`문항 이미지/5번 그림 1.png`, `문항 이미지/5번 그림 2.png`, `문항 이미지/5번 그림 3.png`, `문항 이미지/5번 그림 4.png`],
+    refs:[`잠언 30:24-28 (개미 → 사반 → 메뚜기 → 도마뱀)`],
+    src:`예성 탭 5-2번 — 그림은 "문항 이미지" 폴더에 저장됨, 정답 순서 1~4 확인 완료` },
+  // ⚠ 주의: index.html의 현재 문항 화면(viewQuestion)은 텍스트만 렌더링하고
+  // img 필드를 표시하지 않습니다. 이 문항을 실제로 쓰려면 화면에 <img> 태그를
+  // 추가하는 코드 수정이 필요합니다 — 원하시면 바로 반영해 드릴게요.
+
+  /* ---------------- 50점 (6/6 확보) ---------------- */
+  { id:"50-1", tier:50, type:`연결형(4쌍, 순차 진행)`,
+    q:`잠언 13,14장에서 묘사하고 있는 의인과 해당되는 행동을 바르게 연결하세요.\n\n① 지혜로운 자   ② 입을 지키는 자   ③ 슬기로운 자   ④ 정직하게 행하는 자\nㄱ. 아비의 훈계를 받아들임   ㄴ. 자기 생명을 보전함   ㄷ. 지식으로 면류관을 삼음   ㄹ. 여호와를 경외함`,
+    a:`① - ㄱ   ② - ㄴ   ③ - ㄷ   ④ - ㄹ`,
+    coop:`팀원이 순차적으로 나와 줄을 긋는 방식으로 진행(원본 운영 메모).`,
+    refs:[`잠언 13-14장`],
+    src:`예은 탭 4번` },
+
+  { id:"50-2", tier:50, type:`5지선다`,
+    q:`성경(특히 잠언)을 읽고 삶에 대한 깨달음 중 옳지 않은 것은?\n\n① "부자가 천국에 들어가는 것은 낙타가 바늘귀로 들어가는 것보다 어렵다"는 말씀은, 부자가 재물로 인해 교만해지기 쉽기 때문이라 이해할 수 있다.\n② 아간의 죄로 이스라엘이 아이성 점령에 실패한 것은 악인 한 사람으로 공동체가 패망할 수 있음을 보여준다.\n③ "나는 비천에 처할 줄도 알고 풍부에 처할 줄도 안다"는 바울의 고백과, 극한 환경을 언급한 아굴의 생각은 일치한다.\n④ 형제들이 요셉을 팔아버린 사건은 시기심이 자신과 가정을 병들게 함을 보여준다.\n⑤ 하만이 자신이 세운 나무에 매달려 죽은 사건은 악을 꾀하는 자가 스스로 화를 자초함을 보여준다.`,
+    a:`③ (아굴은 환경 변화로 하나님을 잃을까 걱정한 것이고, 바울은 환경이 변해도 마음이 변치 않는다는 것이라 일치한다고 보기 어려움)`,
+    refs:[`잠언 14:30`, `잠언 26:27`],
+    src:`예성 탭 6번` },
+
+  { id:"50-3", tier:50, type:`릴레이 OX(5문항, 팀 협동)`,
+    q:`잠언 24장 17~18절의 가르침에 비추어 다음 행동이 옳으면 O, 잘못되었으면 X를 릴레이로 답하시오.\n\n① 원수 사울 왕의 전사 소식에 애통해하며 금식한 다윗\n② 니느웨의 멸망을 바라며 혼난 요나\n③ 자신을 노예로 판 형들을 용서하며 위로한 요셉\n④ 모든 것을 잃고도 입술로 범죄하지 않겠다 고백한 욥\n⑤ 남유다의 멸망을 기뻐하다 심판받은 에돔 족속`,
+    a:`① O   ② X   ③ O   ④ O   ⑤ X`,
+    coop:`팀원이 한 문항씩 차례로 이어 답하는 릴레이 방식. 원본 배점 규칙은 "최대 50점"으로, 맞춘 개수에 따라 점수를 나눠 줄지 전부-아니면-없음으로 할지 진행 전 결정이 필요합니다.`,
+    refs:[`잠언 24:17-18`],
+    src:`혁준 탭 19행 · 24:17-18` },
+
+  { id:"50-4", tier:50, type:`(문제 형식 추후 확정)`,
+    q:`잠언과 속담 대응 퀴즈 — 문제 형식은 추후 직접 지정 예정. 우선 제목과 대응 쌍 목록만 자리 잡아 둠.`,
+    a:`(추후 확정)`,
+    refs:[`22:6 · 세 살 버릇 여든까지 간다`,
+          `11:2 · 벼는 익을수록 고개를 숙인다`,
+          `15:1 · 가는 말이 고와야 오는 말이 곱다`,
+          `11:13 · 낮말은 새가 듣고 밤말은 쥐가 듣는다`,
+          `26:27 · 제 꾀에 제가 넘어간다`],
+    src:`혁준 탭 22~26행 · 잠언과 속담 대응 퀴즈(5쌍) — 사용자 요청으로 제목만 우선 포함` },
+
+  { id:"50-5", tier:50, type:`협동 문제(빈칸 채우기 · 일부 미완성)`,
+    q:`다음은 잠언의 유명한 구절들입니다. 조에서 한 사람씩 빈칸에 들어갈 답을 말해서 모두 맞히면 성공입니다!\n\nㄱ. 여호와의 이름은 (   )라. 의인은 그리로 달려가서 안전함을 얻느니라\nㄴ. 너의 (   )를 여호와께 맡기라 그리하면 네가 (   )하는 것이 이루어지리라\nㄷ. (원본 미기재)\nㄹ. (원본 미기재)`,
+    a:`ㄱ. 견고한 망대   ㄴ. 각각 행사와 경영   ㄷ·ㄹ. ⚠ 원본에 구절·정답이 채워져 있지 않음 — 추후 직접 보완 필요`,
+    coop:`조원이 한 명씩 나와 빈칸에 들어갈 답을 말해서 전원이 맞히면 성공하는 방식(원본 운영 방식).`,
+    refs:[`잠언 18:10 (ㄱ)`, `잠언 16:3 (ㄴ)`],
+    src:`예은 탭 11번 — 사용자 요청으로 일단 포함, ㄷ·ㄹ 항목은 추후 직접 보완 예정` },
+
+  { id:"50-6", tier:50, type:`빈칸 채우기(그림 문제 · 정답 확인 필요)`,
+    q:`잠언 6장 16~17절에서 여호와께서 미워하시는 것 네 가지를 빈칸에 알맞게 써 넣으시오.\n\n(선택지 예시) 교만한 눈 / 교활한 눈,  질투하는 혀 / 거짓된 혀,  무죄한 자의 피를 흘리는 손 / 무죄한 자의 목숨을 위협하는 손,  악으로 달려가는 발 / 죄로 달려가는 발`,
+    a:`⚠ 원본에 정답 미기재 — 최종 확인 필요. 참고: 6:17 "교만한 눈과 거짓된 혀와 무죄한 자의 피를 흘리는 손", 6:18 "악한 계교를 꾀하는 마음과 빨리 악으로 달려가는 발"`,
+    refs:[`잠언 6:16-19`],
+    src:`민주 탭 29번 — 40점에서 50점으로 이동(사용자 요청), 정답은 추후 직접 확정 예정` },
+
+];
+
+const QMAP = {};
+QUESTIONS.forEach(q => QMAP[q.id] = q);
+const TIERS = [10,20,30,40,50];
+const TEAM_COLORS = ["#eb5757","#f2994a","#e0a80d","#27ae60","#2f80ed","#9b51e0"];
+
+/* ============================================================
+   상태 (localStorage)
+   ============================================================ */
+const LS_KEY = "bq2026";
+const DEFAULT_STATE = {
+  names: ["1조","2조","3조","4조","5조","6조"],
+  teamCount: 6,
+  solved: {}   // { "10-1": {team: 0} }
+};
+let state = loadState();
+
+function loadState(){
+  try{
+    const raw = JSON.parse(localStorage.getItem(LS_KEY));
+    if(!raw) return structuredClone(DEFAULT_STATE);
+    return {
+      names: Array.isArray(raw.names) && raw.names.length===6 ? raw.names : structuredClone(DEFAULT_STATE.names),
+      teamCount: [2,3,4,5,6].includes(raw.teamCount) ? raw.teamCount : 6,
+      solved: raw.solved && typeof raw.solved==="object" ? raw.solved : {}
+    };
+  }catch(e){ return structuredClone(DEFAULT_STATE); }
+}
+function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+
+function teamScores(){
+  const s = new Array(state.teamCount).fill(0);
+  for(const [qid,rec] of Object.entries(state.solved)){
+    const q = QMAP[qid];
+    if(q && rec && rec.team < state.teamCount) s[rec.team] += q.tier;
+  }
+  return s;
+}
+
+/* ============================================================
+   라우팅
+   ============================================================ */
+function parseHash(){
+  const h = location.hash.replace(/^#\/?/, "");
+  const parts = h.split("/").filter(Boolean);
+  if(parts[0] === "q" && parts[1]) return { name:"question", id:decodeURIComponent(parts[1]) };
+  if(parts[0] === "scoreboard") return { name:"scoreboard" };
+  if(parts[0] === "settings") return { name:"settings" };
+  return { name:"grid" };
+}
+window.addEventListener("hashchange", render);
+window.addEventListener("DOMContentLoaded", render);
+
+function render(){
+  document.onkeydown = null;
+  closeModal();
+  const route = parseHash();
+  renderSidebar(route);
+  const app = document.getElementById("app");
+  app.className = "content" + ((route.name === "scoreboard" || route.name === "settings") ? " scrollable" : "");
+  if(route.name === "question"){
+    if(!QMAP[route.id]){ location.hash = "#/"; return; }
+    app.innerHTML = viewQuestion(QMAP[route.id]);
+    initQuestion(QMAP[route.id]);
+  } else if(route.name === "scoreboard"){
+    app.innerHTML = viewScoreboard();
+  } else if(route.name === "settings"){
+    app.innerHTML = viewSettings();
+    initSettings();
+  } else {
+    app.innerHTML = viewGrid();
+    initGrid();
+  }
+  window.scrollTo(0,0);
+}
+
+function renderSidebar(route){
+  const items = [
+    { hash:"#/", icon:"📖", label:"문항 그리드", on: route.name==="grid"||route.name==="question" },
+    { hash:"#/scoreboard", icon:"🏆", label:"점수판", on: route.name==="scoreboard" },
+    { hash:"#/settings", icon:"⚙️", label:"설정 · 조 편성", on: route.name==="settings" },
+  ];
+  document.getElementById("sidebar").innerHTML =
+    items.map(i => `<a class="nav-item ${i.on?"active":""}" href="${i.hash}" title="${i.label}">${i.icon}</a>`).join("");
+}
+
+/* ============================================================
+   그리드 화면
+   ============================================================ */
+function viewGrid(){
+  const scores = teamScores();
+  const cols = TIERS.map((tier, ti) => {
+    const qs = QUESTIONS.filter(q => q.tier === tier);
+    const tiles = qs.map((q, r) => {
+      const num = r * 5 + ti + 1;
+      const rec = state.solved[q.id];
+      if(rec && rec.team < state.teamCount){
+        return `<a class="qtile solved" href="#/q/${q.id}">
+          <span class="solvedtag">✓ ${esc(state.names[rec.team])} +${q.tier}</span>
+        </a>`;
+      }
+      return `<a class="qtile" href="#/q/${q.id}">
+        <div class="qnum">${num}</div>
+      </a>`;
+    }).join("");
+    return `<div class="tier-col t-${tier}">
+      <div class="tier-head">${tier}점</div>
+      ${tiles}
+    </div>`;
+  }).join("");
+
+  const lead = Math.max(...scores);
+  const chips = state.names.slice(0, state.teamCount).map((n,i) =>
+    `<span class="mchip ${scores[i]===lead && lead>0 ? "lead":""}">
+      <span class="dot" style="width:8px;height:8px;border-radius:50%;background:${TEAM_COLORS[i]}"></span>
+      ${esc(n)} <span class="msc">${scores[i]}</span>
+    </span>`).join("");
+
+  return `
+    <div class="grid-cols">${cols}</div>
+    <div class="mini-wrap">
+      <div class="mini-scoreboard" id="miniSb">
+        <span class="mlabel">조별 점수</span>
+        ${chips}
+        <span class="mini-hint">클릭하면 점수판 크게 보기 →</span>
+      </div>
+    </div>
+  `;
+}
+function initGrid(){
+  const m = document.getElementById("miniSb");
+  if(m) m.addEventListener("click", () => location.hash = "#/scoreboard");
+}
+
+/* ============================================================
+   문항 화면
+   ============================================================ */
+function viewQuestion(q){
+  const idx = QUESTIONS.findIndex(x => x.id === q.id);
+  const prev = idx > 0 ? QUESTIONS[idx-1] : null;
+  const next = idx < QUESTIONS.length-1 ? QUESTIONS[idx+1] : null;
+  const rec = state.solved[q.id];
+  const tierColor = `var(--t${q.tier})`;
+
+  const coop = q.coop ? `<div class="coop-box"><b>협동 방식</b>\n${esc(q.coop)}</div>` : "";
+  const imagesHtml = (q.img && q.img.length)
+    ? `<div class="q-images">${q.img.map((src, i) => `<img src="${encodeURI(src)}" alt="${esc(q.id)} 그림 ${i+1}">`).join("")}</div>`
+    : "";
+
+  let solvedBanner = "";
+  if(rec && rec.team < state.teamCount){
+    solvedBanner = `<div class="solved-banner" style="background:${TEAM_COLORS[rec.team]}">
+      ✓ ${esc(state.names[rec.team])} 정답 처리됨 (+${q.tier}점)
+    </div>`;
+  }
+
+  const awardBtn = (rec && rec.team < state.teamCount)
+    ? `<button class="award-btn undo" id="awardBtn">정답 처리 취소 / 변경</button>`
+    : `<button class="award-btn" id="awardBtn" style="background:${tierColor}">정답 처리 · 점수 부여</button>`;
+
+  return `
+    <div class="qpage">
+      <div class="q-top">
+        <a class="q-back" href="#/">← 그리드로</a>
+        <div class="q-nav">
+          ${prev ? `<a href="#/q/${prev.id}">← ${prev.id}</a>` : `<span class="disabled">← 이전</span>`}
+          ${next ? `<a href="#/q/${next.id}">${next.id} →</a>` : `<span class="disabled">다음 →</span>`}
+        </div>
+      </div>
+
+      <div class="q-meta">
+        <span class="q-badge tier" style="background:${tierColor}">${q.tier}점</span>
+        <span class="q-badge type">${esc(q.type)}</span>
+        <span class="q-badge type" style="background:transparent;color:var(--text-muted)">문항 ${q.id}</span>
+      </div>
+
+      <div class="q-main">
+        <div class="q-text${q.q.length > 110 ? " long" : ""}">${esc(q.q)}</div>
+        ${imagesHtml}
+      </div>
+
+      ${(coop || q.src) ? `<div class="q-explain">${coop}${q.src ? `<div class="src-note">출처 · ${esc(q.src)}</div>` : ""}</div>` : ""}
+      ${solvedBanner}
+      <div class="answer-row">
+        <button class="reveal-btn" id="revealBtn">🔒 정답 보기</button>
+        ${awardBtn}
+      </div>
+      <div class="kbd-hint">
+        <kbd>A</kbd> 정답 · <kbd>←</kbd> <kbd>→</kbd> 문항 이동
+      </div>
+    </div>
+  `;
+}
+
+function initQuestion(q){
+  /* ---- 정답 공개 (중앙 팝업, DOM에 미리 넣지 않음) ---- */
+  const revealBtn = document.getElementById("revealBtn");
+  revealBtn.addEventListener("click", () => {
+    if(document.querySelector(".answer-modal")) closeModal();
+    else openAnswerModal(q);
+  });
+
+  /* ---- 점수 부여 ---- */
+  document.getElementById("awardBtn").addEventListener("click", () => openAwardModal(q));
+
+  /* ---- 단축키 ---- */
+  document.onkeydown = (e) => {
+    if(e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+    if(e.key === "a" || e.key === "A"){ revealBtn.click(); }
+    else if(e.key === "Escape"){ closeModal(); }
+    else if(e.key === "ArrowLeft"){ const i = QUESTIONS.findIndex(x=>x.id===q.id); if(i>0) location.hash = "#/q/"+QUESTIONS[i-1].id; }
+    else if(e.key === "ArrowRight"){ const i = QUESTIONS.findIndex(x=>x.id===q.id); if(i<QUESTIONS.length-1) location.hash = "#/q/"+QUESTIONS[i+1].id; }
+  };
+}
+
+/* ============================================================
+   점수 부여 모달
+   ============================================================ */
+function openAwardModal(q){
+  const rec = state.solved[q.id];
+  const teamBtns = state.names.slice(0, state.teamCount).map((n,i) =>
+    `<button data-team="${i}" ${rec && rec.team===i ? 'style="outline:2px solid '+TEAM_COLORS[i]+';outline-offset:-1px"' : ""}>
+      <span class="dot" style="background:${TEAM_COLORS[i]}"></span>${esc(n)}
+    </button>`).join("");
+
+  const undo = rec ? `<button class="btn danger" id="mUndo">정답 처리 취소</button>` : "";
+
+  document.getElementById("overlay").innerHTML = `
+    <div class="modal-back" id="modalBack">
+      <div class="modal">
+        <h3>정답을 맞춘 조 선택</h3>
+        <p>문항 ${q.id} · ${q.tier}점 — 선택한 조에 <b>${q.tier}점</b>이 부여됩니다.</p>
+        <div class="team-pick">${teamBtns}</div>
+        <div class="modal-actions">
+          ${undo}
+          <button class="btn" id="mCancel">닫기</button>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById("modalBack").addEventListener("click", (e) => { if(e.target.id === "modalBack") closeModal(); });
+  document.getElementById("mCancel").addEventListener("click", closeModal);
+  const u = document.getElementById("mUndo");
+  if(u) u.addEventListener("click", () => {
+    delete state.solved[q.id]; saveState(); closeModal(); render();
+    toast(`${q.id} 정답 처리 취소`);
+  });
+  document.querySelectorAll(".team-pick button").forEach(b =>
+    b.addEventListener("click", () => {
+      const t = parseInt(b.dataset.team,10);
+      state.solved[q.id] = { team:t }; saveState(); closeModal(); render();
+      toast(`${esc(state.names[t])}  +${q.tier}점`);
+    }));
+}
+function closeModal(){
+  document.getElementById("overlay").innerHTML = "";
+  const rb = document.getElementById("revealBtn");
+  if(rb) rb.textContent = "🔒 정답 보기";
+}
+
+/* ============================================================
+   정답 팝업 (중앙)
+   ============================================================ */
+function openAnswerModal(q){
+  document.getElementById("overlay").innerHTML = `
+    <div class="modal-back" id="ansBack">
+      <div class="modal answer-modal">
+        <div class="alabel">정답</div>
+        <div class="atext">${esc(q.a)}</div>
+        <div class="refs">${q.refs.map(r => `<div>· ${esc(r)}</div>`).join("")}</div>
+        ${q.note ? `<div class="note">${esc(q.note)}</div>` : ""}
+        <div class="modal-actions"><button class="btn" id="ansClose">닫기</button></div>
+      </div>
+    </div>`;
+  document.getElementById("ansBack").addEventListener("click", (e) => { if(e.target.id === "ansBack") closeModal(); });
+  document.getElementById("ansClose").addEventListener("click", closeModal);
+  const rb = document.getElementById("revealBtn");
+  if(rb) rb.textContent = "🔓 정답 숨기기";
+}
+
+/* ============================================================
+   점수판 (크게)
+   ============================================================ */
+function viewScoreboard(){
+  const scores = teamScores();
+  const rows = state.names.slice(0, state.teamCount).map((n,i) => ({ n, i, sc: scores[i] }));
+  rows.sort((a,b) => b.sc - a.sc);
+  const max = Math.max(10, ...scores);
+  const solvedCount = Object.keys(state.solved).filter(id => state.solved[id].team < state.teamCount).length;
+
+  let rank = 0, prevScore = null;
+  const list = rows.map((r, idx) => {
+    if(r.sc !== prevScore){ rank = idx + 1; prevScore = r.sc; }
+    const rc = rank <= 3 ? "r"+rank : "";
+    const medal = rank === 1 ? "🥇" : rank === 2 ? "🥈" : rank === 3 ? "🥉" : "";
+    return `<div class="sb-row">
+      <div class="sb-rank ${rc}">${medal || rank}</div>
+      <div class="sb-main">
+        <div class="sb-name"><span style="width:12px;height:12px;border-radius:50%;background:${TEAM_COLORS[r.i]};display:inline-block"></span>${esc(r.n)}</div>
+        <div class="sb-bar-track"><div class="sb-bar" style="width:${(r.sc/max*100)}%;background:${TEAM_COLORS[r.i]}"></div></div>
+      </div>
+      <div class="sb-score">${r.sc}</div>
+    </div>`;
+  }).join("");
+
+  return `
+    <div class="q-top"><a class="q-back" href="#/">← 그리드로</a><span></span></div>
+    <h1 class="page-title">점수판</h1>
+    <p class="page-sub">푼 문항 ${solvedCount} / ${QUESTIONS.length} · 합계 ${scores.reduce((a,b)=>a+b,0)}점</p>
+    <div class="sb-list">${list}</div>
+  `;
+}
+
+/* ============================================================
+   설정 · 조 편성
+   ============================================================ */
+function viewSettings(){
+  const countBtns = [2,3,4,5,6].map(c =>
+    `<button data-count="${c}" class="${state.teamCount===c?"on":""}">${c}조</button>`).join("");
+  const inputs = state.names.map((n,i) =>
+    `<div class="team-input-row ${i>=state.teamCount?"off":""}">
+      <span class="dot" style="background:${TEAM_COLORS[i]}"></span>
+      <input type="text" data-idx="${i}" value="${esc(n)}" ${i>=state.teamCount?"disabled":""} maxlength="20" />
+    </div>`).join("");
+
+  return `
+    <h1 class="page-title">설정 · 조 편성</h1>
+    <p class="page-sub">여기서 정한 조와 점수는 이 브라우저에 저장되어 새로고침해도 유지됩니다.</p>
+
+    <div class="set-block">
+      <h3>조 수</h3>
+      <p class="hint">참가하는 조의 수를 고르세요. (최대 6조)</p>
+      <div class="count-btns" id="countBtns">${countBtns}</div>
+
+      <h3>조 이름</h3>
+      <p class="hint">기본값은 "1조 ~ 6조"입니다. 필요하면 팀명으로 바꾸세요.</p>
+      ${inputs}
+      <div style="margin-top:16px;display:flex;gap:8px">
+        <button class="btn primary" id="saveTeams">저장</button>
+        <span id="saveMsg" style="align-self:center;font-size:13px;color:var(--t20);font-weight:600"></span>
+      </div>
+    </div>
+
+    <div class="set-block">
+      <h3>진행 초기화</h3>
+      <p class="hint">모든 문항의 정답 처리 기록과 점수를 지웁니다. 조 이름은 유지됩니다.</p>
+      <button class="btn danger" id="resetProgress">점수 · 진행 상황 초기화</button>
+    </div>
+  `;
+}
+function initSettings(){
+  document.querySelectorAll("#countBtns button").forEach(b =>
+    b.addEventListener("click", () => {
+      state.teamCount = parseInt(b.dataset.count,10);
+      // 빈 이름 자동 채움
+      state.names = state.names.map((n,i) => n && n.trim() ? n : `${i+1}조`);
+      saveState(); render();
+    }));
+  document.getElementById("saveTeams").addEventListener("click", () => {
+    document.querySelectorAll(".team-input-row input").forEach(inp => {
+      const i = parseInt(inp.dataset.idx,10);
+      const v = inp.value.trim();
+      state.names[i] = v || `${i+1}조`;
+    });
+    saveState();
+    const m = document.getElementById("saveMsg");
+    m.textContent = "저장되었습니다 ✓";
+    setTimeout(() => { m.textContent = ""; }, 2000);
+    renderSidebar(parseHash());
+  });
+  document.getElementById("resetProgress").addEventListener("click", () => {
+    if(confirm("모든 조의 점수와 정답 처리 기록을 지웁니다. 계속할까요?")){
+      state.solved = {}; saveState(); render();
+      toast("진행 상황을 초기화했습니다");
+    }
+  });
+}
+
+/* ============================================================
+   유틸
+   ============================================================ */
+function esc(s){
+  return String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c]));
+}
+let toastTimer = null;
+function toast(msg){
+  const el = document.getElementById("toast");
+  el.innerHTML = `<div class="toast">${msg}</div>`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.innerHTML = ""; }, 2200);
+}
+</script>
+</body>
+</html>
