@@ -149,6 +149,13 @@
   .coop-box b{color:var(--t40)}
   .q-images{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px}
   .q-images img{max-height:34vh;max-width:100%;border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow);object-fit:contain;background:#fff}
+  .q-images.multi{flex-wrap:nowrap;gap:14px;width:100%}
+  .q-images.multi figure{position:relative;margin:0;flex:0 1 auto;max-width:calc((100% - 14px * (var(--n) - 1)) / var(--n))}
+  .q-images.multi img{display:block;width:100%;height:auto}
+  .img-num{
+    position:absolute;top:8px;left:8px;background:rgba(0,0,0,.72);color:#fff;
+    font-size:clamp(22px,2.6vw,34px);font-weight:700;line-height:1;padding:4px 8px 6px;border-radius:10px
+  }
 
   /* ---------- 연결형 문항 (드래그 매칭) ---------- */
   .connect-box{display:flex;flex-direction:column;align-items:center;gap:22px;width:100%}
@@ -353,8 +360,8 @@
    - 문제(q)·선지·정답(a)은 "성경퀴즈대회 문항 최종.md" 원문과
      완전히 동일한 문구로 작성했습니다(선지 번호가 원본에서 깨져 있던
      20-4번만 ①②③④ 표기로 정리했고, 그 외 문구는 그대로입니다).
-   - 그림이 필요한 문항(10-4, 10-6, 20-6)은 img 필드에 플레이스홀더만
-     넣어 두었습니다. 그림은 사용자가 직접 첨부한 뒤 다시 작업합니다.
+   - 그림 문항(10-4, 10-6, 20-3, 20-6, 50-6)은 img 필드에 "문항 이미지/" 경로를 넣었습니다.
+     그림이 2장 이상이면 화면에 ①②③… 번호가 붙어 선지 역할을 합니다.
    - 40-1은 최종.md에 태그가 없어(40-2~40-6만 존재) 사용자 확인 결과
      기존 40-1 문항(예은 탭 2번, 공통 빈칸 오답 찾기)을 그대로 유지했습니다.
    ============================================================ */
@@ -381,7 +388,7 @@ const QUESTIONS = [
 
   { id:"10-4", tier:10, type:`주관식 그림문제`,
     q:`다음 그림이 나타내는 사람은 어떤 사람인가?`,
-    img:[`(이미지 플레이스홀더 — 사용자가 첨부 후 다시 작업)`],
+    img:[`문항 이미지/10-4.jpg`],
     a:`게으른 자`,
     refs:[`잠언 20:4, 19:24 — 반복적으로 나오는 게으른 자에 대한 설명`],
     src:`혁준 탭 32번 · 성경퀴즈대회 문항 최종.md` },
@@ -394,8 +401,8 @@ const QUESTIONS = [
 
   { id:"10-6", tier:10, type:`그림 선택형`,
     q:`잠언서에서 계속 반복되는 가르침에 비추어 봤을 때 어떤 행동이 솔로몬이 보았을 때 합당할 지 선택하시오`,
-    img:[`(이미지 플레이스홀더 1 — 사용자가 첨부 후 다시 작업)`, `(이미지 플레이스홀더 2 — 사용자가 첨부 후 다시 작업)`],
-    a:`2`,
+    img:[`문항 이미지/10-6_1.png`, `문항 이미지/10-6_2.png`],
+    a:`②`,
     refs:[`잠언 23:9 "미련한 자의 귀에 말하지 말지니 이는 그가 네 지혜로운 말을 업신여길 것임이니라."`],
     src:`예성 탭 2번 · 성경퀴즈대회 문항 최종.md` },
 
@@ -412,9 +419,10 @@ const QUESTIONS = [
     refs:[`16:31 영화의 면류관`, `17:6 노인의 면류관`, `14:18 지식의 면류관`, `12:4 지아비의 면류관`],
     src:`예은 탭 8번 · 성경퀴즈대회 문항 최종.md` },
 
-  { id:"20-3", tier:20, type:`5지선다(빈칸 채우기)`,
-    q:`"정녕히 재물은 스스로 날개를 내어 하늘을 나는 (      )처럼 날아가리라"(23:5)에서 저자가 왜 하필 이 대상에 빗대었는지 생각할 때, 빈칸에 들어갈 말로 가장 알맞은 것은?\n\n①비둘기\n②참새\n③독수리\n④닭\n⑤메추라기`,
-    a:`③독수리`,
+  { id:"20-3", tier:20, type:`4지선다(그림, 빈칸 채우기)`,
+    q:`"정녕히 재물은 스스로 날개를 내어 하늘을 나는 (      )처럼 날아가리라"(23:5)에서 저자가 왜 하필 이 대상에 빗대었는지 생각할 때, 빈칸에 들어갈 말로 가장 알맞은 것은?`,
+    img:[`문항 이미지/20-3_1.jpg`, `문항 이미지/20-3_2.jpg`, `문항 이미지/20-4_3.jpg`, `문항 이미지/20-4_4.jpg`],
+    a:`① 독수리`,
     refs:[`잠언 23:5`, `해설: 그림 퀴즈로 재미있게 접근하면 어떨까...?`],
     src:`혁준 탭 40번 · 성경퀴즈대회 문항 최종.md` },
 
@@ -432,7 +440,7 @@ const QUESTIONS = [
 
   { id:"20-6", tier:20, type:`상황 판단형(그림)`,
     q:`다음은 잠언을 읽은 갑, 을, 병의 대화이다. 갑, 을, 병 중 잠언을 잘 이해한 사람은?`,
-    img:[`(이미지 플레이스홀더 — 사용자가 첨부 후 다시 작업)`],
+    img:[`문항 이미지/20-6.png`],
     a:`병`,
     refs:[`갑: 미련한 자는 당장 분노를 나타내거니와 슬기로운 자는 수욕을 참느니라 (16절)`,
           `을: 성경은 진실을 말할 것을 원칙으로 가르칩니다. (5절, 17절, 19절, 20절) — 십계명 "네 이웃에 대하여 거짓 증거하지 말라"(출20:16), 잠언 "거짓 입술은 여호와께 미움을 받아도 진실하게 행하는 자는 그의 기뻐하심을 받느니라"(잠12:22), "거짓말쟁이는 벌을 면하지 못할 것이요 거짓을 말하는 자도 망할 것이라"(잠19:5)`,
@@ -562,6 +570,7 @@ const QUESTIONS = [
 
   { id:"50-6", tier:50, type:`빈칸 채우기`,
     q:`잠언 6장 16~17절에서 여호와께서 미워하시는 것에 해당하는 말을 각 부위에서 하나씩 고르시오\n\n(선택지 예시) 교만한 눈 / 교활한 눈,  질투하는 혀 / 거짓된 혀,  무죄한 자의 피를 흘리는 손 / 무죄한 자의 목숨을 위협하는 손,  악으로 달려가는 발 / 죄로 달려가는 발`,
+    img:[`문항 이미지/50-6.png`],
     a:`교만한 눈, 거짓된 혀, 무죄한 자의 피를 흘리는 손, 악으로 달려가는 발`,
     refs:[`잠언 6:16-19`],
     src:`민주 탭 29번 · 성경퀴즈대회 문항 최종.md (정답 확정됨, 2026-09-19)` },
@@ -715,7 +724,9 @@ function viewQuestion(q){
 
   const coop = q.coop ? `<div class="coop-box"><b>협동 방식</b>\n${esc(q.coop)}</div>` : "";
   const imagesHtml = (q.img && q.img.length)
-    ? `<div class="q-images">${q.img.map((src, i) => `<img src="${encodeURI(src)}" alt="${esc(q.id)} 그림 ${i+1}">`).join("")}</div>`
+    ? (q.img.length > 1
+      ? `<div class="q-images multi" style="--n:${q.img.length}">${q.img.map((src, i) => `<figure><img src="${encodeURI(src)}" alt="${esc(q.id)} 그림 ${i+1}"><span class="img-num">${"①②③④⑤⑥⑦⑧⑨⑩"[i]}</span></figure>`).join("")}</div>`
+      : `<div class="q-images"><img src="${encodeURI(q.img[0])}" alt="${esc(q.id)} 그림"></div>`)
     : "";
 
   const connectParsed = (q.type && q.type.includes("연결형")) ? parseConnectQ(q.q) : null;
