@@ -86,7 +86,7 @@ const QUESTIONS = [
 
   { id:"20-6", tier:20, type:`상황 판단형(그림)`,
     q:`다음은 잠언을 읽은 갑, 을, 병의 대화이다. 갑, 을, 병 중 잠언을 잘 이해한 사람은?`,
-    img:[`문항 이미지/20-6.png`],
+    img:[`문항 이미지/20-6.png`], imgH:`66vh`, qSize:`clamp(16px,1.8vw,22px)`,
     a:`병`,
     refs:[`갑: 미련한 자는 당장 분노를 나타내거니와 슬기로운 자는 수욕을 참느니라 (16절)`,
           `을: 성경은 진실을 말할 것을 원칙으로 가르칩니다. (5절, 17절, 19절, 20절) — 십계명 "네 이웃에 대하여 거짓 증거하지 말라"(출20:16), 잠언 "거짓 입술은 여호와께 미움을 받아도 진실하게 행하는 자는 그의 기뻐하심을 받느니라"(잠12:22), "거짓말쟁이는 벌을 면하지 못할 것이요 거짓을 말하는 자도 망할 것이라"(잠19:5)`,
@@ -95,7 +95,7 @@ const QUESTIONS = [
 
   /* ---------------- 30점 ---------------- */
   { id:"30-1", tier:30, type:`5지선다`,
-    q:`잠언에서 '생명의 샘'이라고 표현된 것이 아닌 것은 무엇일까요?\n\n① 지혜 있는 자의 교훈② 여호와를 경외하는 것③ 의인의 입④ 명철⑤ 의인의 열매`,
+    q:`잠언에서 '생명의 샘'이라고 표현된 것이 아닌 것은 무엇일까요?\n\n① 지혜 있는 자의 교훈\n② 여호와를 경외하는 것\n③ 의인의 입\n④ 명철\n⑤ 의인의 열매`,
     a:`⑤ 의인의 열매는 생명나무라`,
     refs:[`지혜 있는 자의 교훈 → 13:14`, `여호와를 경외하는 것 → 14:27`, `의인의 입 → 10:11`, `명철 → 16:22`, `의인의 열매 → 11:30 "의인의 열매는 생명나무라" → 생명의 샘이 아님`],
     src:`예은 탭 3번 · 성경퀴즈대회 문항 최종.md` },
@@ -620,7 +620,7 @@ function viewQuestion(q){
 
       <div class="q-main">
         ${q.slides ? `<div class="slide-box" id="slideBox"></div>`
-          : isConnect ? renderConnectUI(connectParsed) : `<div class="q-text${q.q.length > 110 ? " long" : ""}">${renderQBlock(q.q)}</div>`}
+          : isConnect ? renderConnectUI(connectParsed) : `<div class="q-text${q.q.length > 110 ? " long" : ""}"${q.qSize ? ` data-size="${q.qSize}"` : ""}>${renderQBlock(q.q)}</div>`}
         ${imagesHtml}
       </div>
 
@@ -727,7 +727,7 @@ function fitQuestionText(){
   const qmain = document.querySelector(".q-main");
   const qtext = document.querySelector(".q-text");
   if(!qmain || !qtext) return;
-  qtext.style.fontSize = "";
+  qtext.style.fontSize = qtext.dataset.size || "";
   requestAnimationFrame(() => {
     let size = parseFloat(getComputedStyle(qtext).fontSize);
     const minSize = 14;
