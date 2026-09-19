@@ -37,12 +37,12 @@
     position:sticky;top:0;background:var(--bg);z-index:50;
   }
   .topbar .left{font-weight:700;font-size:15px;letter-spacing:-.01em}
-  .topbar .right{font-size:13px;color:var(--text-muted);display:flex;align-items:center}
-  .timer{display:flex;align-items:center;gap:4px;margin-left:16px}
-  .timer-disp{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text);letter-spacing:.01em;min-width:3.2em;text-align:right}
+  .topbar .right{font-size:13px;color:var(--text-muted)}
+  .timer{display:flex;align-items:center;gap:8px;margin-left:auto}
+  .timer-disp{font-size:clamp(36px,5vw,64px);line-height:1;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text);letter-spacing:.01em}
   .timer.idle .timer-disp{color:var(--text-muted)}
   .timer.warn .timer-disp{color:#e03e3e}
-  .timer .tbtn{border:1px solid var(--border);background:var(--bg);border-radius:6px;width:30px;height:30px;font-size:13px;color:var(--text);padding:0}
+  .timer .tbtn{border:1px solid var(--border);background:var(--bg);border-radius:8px;width:44px;height:44px;font-size:18px;color:var(--text);padding:0}
   .timer .tbtn:hover{background:var(--hover)}
 
   /* ---------- shell ---------- */
@@ -120,12 +120,6 @@
   .q-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;flex-shrink:0}
   .q-back{font-size:15px;font-weight:700;color:#fff;background:var(--text);text-decoration:none;padding:8px 16px;border-radius:8px;box-shadow:var(--shadow)}
   .q-back:hover{opacity:.85}
-  .q-nav{display:flex;gap:6px}
-  .q-nav a,.q-nav span{
-    font-size:13px;padding:3px 10px;border:1px solid var(--border);border-radius:6px;text-decoration:none;color:var(--text)
-  }
-  .q-nav a:hover{background:var(--hover)}
-  .q-nav .disabled{opacity:.4;pointer-events:none}
 
 
   .q-meta{display:flex;gap:6px;align-items:center;margin-bottom:8px;flex-wrap:wrap;flex-shrink:0}
@@ -368,4 +362,4 @@
 
   body.projection #sidebar, body.projection #app, body.projection #overlay{pointer-events:none}
   body.projection #app .connect-item, body.projection #app .connect-reset{pointer-events:auto}
-  body.projection #sidebar, body.projection .q-top, body.projection .answer-row, body.projection .kbd-hint, body.projection .slide-nav{display:none}
+  body.projection #sidebar, body.projection .q-back, body.projection .answer-row, body.projection .kbd-hint, body.projection .slide-nav{display:none}

@@ -319,6 +319,7 @@ function render(){
     if(!QMAP[route.id]){ location.hash = "#/"; return; }
     app.innerHTML = viewQuestion(QMAP[route.id]);
     initQuestion(QMAP[route.id]);
+    initTimer();
   } else if(route.name === "scoreboard"){
     app.innerHTML = viewScoreboard();
   } else if(route.name === "settings"){
@@ -485,9 +486,8 @@ function initTimer(){
     document.getElementById("timerReset").addEventListener("click", () => setTimer({ endAt:null, left:TIMER_MS }));
   }
   drawTimer();
-  setInterval(drawTimer, 200);
 }
-initTimer();
+setInterval(drawTimer, 200);
 
 function renderSidebar(route){
   const items = [
@@ -552,9 +552,6 @@ function initGrid(){
    문항 화면
    ============================================================ */
 function viewQuestion(q){
-  const idx = QUESTIONS.findIndex(x => x.id === q.id);
-  const prev = idx > 0 ? QUESTIONS[idx-1] : null;
-  const next = idx < QUESTIONS.length-1 ? QUESTIONS[idx+1] : null;
   const recs = (state.solved[q.id] || []).filter(x => x.team < state.teamCount);
   const tierColor = `var(--t${q.tier})`;
 
@@ -580,10 +577,7 @@ function viewQuestion(q){
     <div class="qpage">
       <div class="q-top">
         <a class="q-back" href="#/">← 문항 선택으로</a>
-        <div class="q-nav">
-          ${prev ? `<a href="#/q/${prev.id}">← ${prev.id}</a>` : `<span class="disabled">← 이전</span>`}
-          ${next ? `<a href="#/q/${next.id}">${next.id} →</a>` : `<span class="disabled">다음 →</span>`}
-        </div>
+        <div class="timer" id="timer"></div>
       </div>
 
       <div class="q-meta">
