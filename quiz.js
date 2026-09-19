@@ -205,6 +205,8 @@ const QUESTIONS = [
 낮말은 새가 듣고 밤말은 쥐가 듣는다
 제 꾀에 제가 넘어간다`,
     slides:[
+      { v:`사람이 무엇으로 심든지 그대로 거두리라`, r:`갈라디아서 6:7`, a:`콩 심은 데 콩 나고 팥 심은 데 팥 난다`, ex:true },
+      { title:true },
       { v:`마땅히 행할 길을 아이에게 가르치라 그리하면 늙어도 그것을 떠나지 아니하리라`, r:`잠언 22:6`, a:`세 살 버릇 여든까지 간다` },
       { v:`교만이 오면 욕도 따라오거니와 겸손한 자에게는 지혜가 있느니라`, r:`잠언 11:2`, a:`벼는 익을수록 고개를 숙인다` },
       { v:`유순한 대답은 분노를 쉬게 하여도 과격한 말은 노를 격동하느니라`, r:`잠언 15:1`, a:`가는 말이 고와야 오는 말이 곱다` },
@@ -605,19 +607,19 @@ function initQuestion(q){
 }
 
 /* ============================================================
-   슬라이드 문항 — 1페이지 제목, 2페이지부터 구절 하나씩
+   슬라이드 문항 — 1페이지 제목, 2페이지부터 구절 하나씩({title:true}면 제목 재표시, ex:true면 예시 표시)
    ============================================================ */
 function curAnswer(q){
   if(!q.slides) return q.a;
   const s = q.slides[slideIdx - 1];
-  return s ? s.a : q.a;
+  return s && s.a ? s.a : q.a;
 }
 function showSlide(q, i){
   slideIdx = i;
   const s = q.slides[i - 1];
   const box = document.getElementById("slideBox");
-  if(box) box.innerHTML = s
-    ? `<div class="slide-verse">${esc(s.v)}</div><div class="slide-ref">${esc(s.r)}</div>`
+  if(box) box.innerHTML = s && !s.title
+    ? `${s.ex ? `<div class="slide-ex">예시</div>` : ""}<div class="slide-verse">${esc(s.v)}</div><div class="slide-ref">${esc(s.r)}</div>`
     : `<div class="slide-title">${esc(q.q)}</div>`;
   const c = document.getElementById("slideCount");
   if(c) c.textContent = `${i + 1} / ${q.slides.length + 1}`;
