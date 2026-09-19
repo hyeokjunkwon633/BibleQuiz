@@ -20,11 +20,11 @@ const QUESTIONS = [
     refs:[`잠언 28:1`, `해설: 악인은 소심하고, 의인은 용기롭다는 뜻이 아님. 의인은 하나님 앞에 살기 때문에 담대하다는 것을 저자는 이야기 함`],
     src:`예성 탭 4번 · 성경퀴즈대회 문항 최종.md` },
 
-  { id:"10-2", tier:10, type:`주관식(히브리어 단어)`,
-    q:`다음 단어를 히브리어로 하면 무엇인가요?\n\n① 잠언\n② 지혜롭다\n③ 맡기다`,
-    a:`① 마샬 ② 호크마 ③ 갈랄`,
-    refs:[`성도님들 탭 48·49번(잠언=마샬, 지혜롭다=호크마)`, `맡기다=갈랄(사용자 지정)`],
-    src:`성도님들 탭 48·49번 + 사용자 지정(맡기다=갈랄) · 성경퀴즈대회 문항 최종.md` },
+  { id:"10-2", tier:10, type:`5지선다`,
+    q:`잠언 25장 3절(하늘의 높음과 땅의 깊음 같이 왕의 마음은 헤아릴 수 없느니라)와 이사야 43장 18~19절(너희는 이전 일을 기억하지 말며…보라 내가 새 일을 행하리니)의 공통점으로 알맞은 것은?\n\n① 인간의 어리석음을 꾸짖고 있다\n② 하나님은 보이지 않아도 일하신다\n③ 왕의 변덕스러움과 대비되는 하나님의 전지전능하심을 나타낸다\n④ 사람이 현재의 상황만으로 앞으로 일어날 일을 판단해서는 안 된다고 말한다.\n⑤ 인간이 이해할 수 없는 모든 일은 하나님의 뜻으로 받아들여야 한다고 가르친다.`,
+    a:`②`,
+    refs:[`잠언 25장 3절`, `이사야 43장 18~19절`, `해설: 두 구절 모두 우리가 인지하지 못해도 살아서 일하고 계시는 하나님에 대해 이야기 하고 있으며, 따라서 우린 그분의 일하심을 의심하지 말 것을 권면한다.`],
+    src:`예성 탭 1번 · 성경퀴즈대회 문항 최종.md` },
 
   { id:"10-3", tier:10, type:`4지선다`,
     q:`잠언 16장 3절("너의 행사를 여호와께 맡기라 그리하면 네가 경영하는 것이 이루리라.")에서 "맡기라"는 의미와 다른 것은?\n\n① 무거운 돌을  굴려 가면서 그 무게와 움직임을 땅에 맡기다.\n② 물살에 돌을 던져 그 움직임을 물의 흐름에 맡기다.\n③ 무거운 짐을 수레에 옮겨 싣고, 그 운반을 수레에 맡기다.\n④ 은행에 막대한 예금을 안전하게 맡기다.`,
@@ -108,17 +108,17 @@ const QUESTIONS = [
           `2. 분을 쉽게내는 것     3. 게으름         4. 독단적인 사고`],
     src:`예은 탭 5번 · 성경퀴즈대회 문항 최종.md` },
 
-  { id:"30-3", tier:30, type:`5지선다`,
-    q:`잠언 25장 3절(하늘의 높음과 땅의 깊음 같이 왕의 마음은 헤아릴 수 없느니라)와 이사야 43장 18~19절(너희는 이전 일을 기억하지 말며…보라 내가 새 일을 행하리니)의 공통점으로 알맞은 것은?\n\n① 인간의 어리석음을 꾸짖고 있다\n② 하나님은 보이지 않아도 일하신다\n③ 왕의 변덕스러움과 대비되는 하나님의 전지전능하심을 나타낸다\n④ 사람이 현재의 상황만으로 앞으로 일어날 일을 판단해서는 안 된다고 말한다.\n⑤ 인간이 이해할 수 없는 모든 일은 하나님의 뜻으로 받아들여야 한다고 가르친다.`,
-    a:`②`,
-    refs:[`잠언 25장 3절`, `이사야 43장 18~19절`, `해설: 두 구절 모두 우리가 인지하지 못해도 살아서 일하고 계시는 하나님에 대해 이야기 하고 있으며, 따라서 우린 그분의 일하심을 의심하지 말 것을 권면한다.`],
-    src:`예성 탭 1번 · 성경퀴즈대회 문항 최종.md` },
+  { id:"30-3", tier:30, type:`주관식(히브리어 단어)`,
+    q:`다음 단어를 히브리어로 하면 무엇인가요?\n\n① 잠언\n② 지혜롭다\n③ 맡기다`,
+    a:`① 마샬 ② 호크마 ③ 갈랄`,
+    refs:[`성도님들 탭 48·49번(잠언=마샬, 지혜롭다=호크마)`, `맡기다=갈랄(사용자 지정)`],
+    src:`성도님들 탭 48·49번 + 사용자 지정(맡기다=갈랄) · 성경퀴즈대회 문항 최종.md` },
 
-  { id:"30-4", tier:30, type:`객관식(정답 2개)`,
-    q:`26장 1~16절은 우리가 인생에서 멀리해야 하는 인물에 대해 가르치고 있습니다.\n이때 우리가 멀리해야 하는 사람의 특징으로 잘못된 것은? (정답 2개)\n\n① 미련한 자는 능력이 부족하여 영예를 얻기에 합당하지 않다(잠 26:1)\n② 미련한 자는 귀가 좋지 않아 남의 말을 잘 듣지 못 한다\n③ 미련한 자와 스스로를 지혜롭게 여기는 사람은 똑같이 해롭다 (26:12)\n④ 게으른 자는 나태하여 문제 발생시 원인을 찾는 것조차 귀찮아 한다(26:13)\n⑤ 게으른 자는 스스로를 지혜롭게 여기는 사람이다.(잠 26:16)\n⑥ 사람은 악하여 분란 일으키는 사람을 쫓아내도 또 다른 이가 등장한다(잠 26:20)\n⑦ 마음이 악한 사람은 겉으로도 그 악함이 드러난다(잠 26:23~25)\n⑧ 악한 사람은 자신의 악함으로 인해 결국 패망한다. (잠 26:27~28)`,
-    a:`⑤, ⑧`,
-    refs:[`잠언 26장 16절`],
-    src:`예성 탭 3번 · 성경퀴즈대회 문항 최종.md` },
+  { id:"30-4", tier:30, type:`서술형(3가지 나열)`,
+    q:`여호와를 경외하는 것은 생명의 샘이니 사망의 그물에서 벗어나게 하느니라. 경외한다의 의미를 말하세요 (총 3가지)`,
+    a:`하나님을 하나님으로 인정해드린다.\n하나님을 하나님으로 존중한다.\n하나님의 말씀대로 순종한다.`,
+    refs:[`잠언 14:27`],
+    src:`예은 탭 4번(주관식) · 성경퀴즈대회 문항 최종.md` },
 
   { id:"30-5", tier:30, type:`순서 배열형`,
     q:`다음 구절을 올바른 순서로 배열하시오.\n\nㄱ. 너는 범사에 그를 인정하라\nㄴ. 네 명철을 의지하지 말라\nㄷ. 그리하면 네 길을 지도하시리라\nㄹ. 너는 마음을 다하여 여호와를 신뢰하고`,
@@ -133,11 +133,11 @@ const QUESTIONS = [
     src:`은아 탭 43번 · 성경퀴즈대회 문항 최종.md` },
 
   /* ---------------- 40점 ---------------- */
-  { id:"40-1", tier:40, type:`빈칸 채우기(공통 오답 찾기)`,
-    q:`다음 잠언 말씀의 빈칸에 들어가는 말이 나머지와 다른 것은?\n\n① 입을 지키는 자는 자기의 (   )을/를 보전하나 입술을 크게 벌리는 자에게는 멸망이 오느니라 (13:3)\n② 여호와를 경외하는 자에게는 견고한 의뢰가 있나니 그 자녀들에게 (   )가/이 있으리라 (14:26)\n③ (   )의 경계를 듣는 귀는 지혜로운 자 가운데에 있느니라 (15:31)\n④ 왕의 희색은 (   )을/를 뜻하나니 그의 은택이 늦은 비를 내리는 구름과 같으니라 (16:15)\n⑤ 지혜있는 자의 교훈은 (   )의 샘이니 사망의 그물에서 벗어나게 하느니라 (13:14)`,
-    a:`② -피난처 (①③④⑤는 모두 "생명", ②만 "생명"이 아님)`,
-    refs:[`13:3`, `14:26`, `15:31`, `16:15`, `13:14`],
-    src:`예은 탭 2번 · 최종.md에 40-1 태그가 없어 사용자 확인 후 기존 문항 유지(2026-09-19)` },
+  { id:"40-1", tier:40, type:`객관식(정답 2개)`,
+    q:`26장 1~16절은 우리가 인생에서 멀리해야 하는 인물에 대해 가르치고 있습니다.\n이때 우리가 멀리해야 하는 사람의 특징으로 잘못된 것은? (정답 2개)\n\n① 미련한 자는 능력이 부족하여 영예를 얻기에 합당하지 않다(잠 26:1)\n② 미련한 자는 귀가 좋지 않아 남의 말을 잘 듣지 못 한다\n③ 미련한 자와 스스로를 지혜롭게 여기는 사람은 똑같이 해롭다 (26:12)\n④ 게으른 자는 나태하여 문제 발생시 원인을 찾는 것조차 귀찮아 한다(26:13)\n⑤ 게으른 자는 스스로를 지혜롭게 여기는 사람이다.(잠 26:16)\n⑥ 사람은 악하여 분란 일으키는 사람을 쫓아내도 또 다른 이가 등장한다(잠 26:20)\n⑦ 마음이 악한 사람은 겉으로도 그 악함이 드러난다(잠 26:23~25)\n⑧ 악한 사람은 자신의 악함으로 인해 결국 패망한다. (잠 26:27~28)`,
+    a:`⑤, ⑧`,
+    refs:[`잠언 26장 16절`],
+    src:`예성 탭 3번 · 성경퀴즈대회 문항 최종.md` },
 
   { id:"40-2", tier:40, type:`연결형(4쌍)`,
     q:`잠언 13,14장에서 묘사하고 있는 의인과 해당되는 행동을 바르게 연결하세요\n\n㉠ 지혜로운 자             ⓐ 자기 생명을 보전함\n㉡ 입을 지키는 자         ⓑ 아비의 훈계를 받아들임\n㉢ 슬기로운 자             ⓒ 지식으로 면류관을 삼음\n㉣ 정직하게 행하는 자    ⓓ 여호와를 경외함`,
@@ -147,7 +147,7 @@ const QUESTIONS = [
     src:`예은 탭 4번 · 성경퀴즈대회 문항 최종.md` },
 
   { id:"40-3", tier:40, type:`연결형(4쌍)`,
-    q:`다음 중 잠언 24~28절은 이것이 부족하나 지혜로운 동물 4종에 대해 말하고 있습니다.\n이때 각 동물별로 부족한 것을 옳게 연결하면?\n\n① 왕                             ⓐ 개미② 힘                              ⓑ 사반③ 날개                           ⓒ 메뚜기④ 지혜                           ⓓ 도마뱀`,
+    q:`다음 잠언 구절과 그 동물을 옳게 연결하시오.\n\n① 힘이 없지만 먹을 것을 여름에 준비하는 ⓐ 개미\n② 약하지만 집을 바위에 짓는 ⓑ 사반\n③ 임금이 없지만 다 떼를 지어 다니는 ⓒ 메뚜기\n④ 작아도 왕궁에 있는 ⓓ 도마뱀`,
     a:`① - ⓐ               ② - ⓑ             ③ - ⓒ             ④ - ⓓ`,
     refs:[`잠언 30:24-28`],
     src:`예성 탭 5번 · 성경퀴즈대회 문항 최종.md` },
@@ -176,11 +176,11 @@ const QUESTIONS = [
     src:`은아 탭 42번 · 성경퀴즈대회 문항 최종.md` },
 
   /* ---------------- 50점 ---------------- */
-  { id:"50-1", tier:50, type:`서술형(3가지 나열)`,
-    q:`여호와를 경외하는 것은 생명의 샘이니 사망의 그물에서 벗어나게 하느니라. 경외한다의 의미를 말하세요 (총 3가지)`,
-    a:`하나님을 하나님으로 인정해드린다.\n하나님을 하나님으로 존중한다.\n하나님의 말씀대로 순종한다.`,
-    refs:[`잠언 14:27`],
-    src:`예은 탭 4번(주관식) · 성경퀴즈대회 문항 최종.md` },
+  { id:"50-1", tier:50, type:`빈칸 채우기(공통 오답 찾기)`,
+    q:`다음 잠언 말씀의 빈칸에 들어가는 말이 나머지와 다른 것은?\n\n① 입을 지키는 자는 자기의 (   )을/를 보전하나 입술을 크게 벌리는 자에게는 멸망이 오느니라 (13:3)\n② 여호와를 경외하는 자에게는 견고한 의뢰가 있나니 그 자녀들에게 (   )가/이 있으리라 (14:26)\n③ (   )의 경계를 듣는 귀는 지혜로운 자 가운데에 있느니라 (15:31)\n④ 왕의 희색은 (   )을/를 뜻하나니 그의 은택이 늦은 비를 내리는 구름과 같으니라 (16:15)\n⑤ 지혜있는 자의 교훈은 (   )의 샘이니 사망의 그물에서 벗어나게 하느니라 (13:14)`,
+    a:`② -피난처 (①③④⑤는 모두 "생명", ②만 "생명"이 아님)`,
+    refs:[`13:3`, `14:26`, `15:31`, `16:15`, `13:14`],
+    src:`예은 탭 2번 · 최종.md에 40-1 태그가 없어 사용자 확인 후 기존 문항 유지(2026-09-19)` },
 
   { id:"50-2", tier:50, type:`5지선다`,
     q:`잠언을 읽고 성경을 이해한 것 중 옳지 않은 것은?\n\n① 예수님께서 "부자가 천국에 들어가는 것은 낙타가 바늘귀로 들어가는 것보다 어렵다"고 하신 말씀은, 부자가 재물로 인해 교만해지기 쉽기 때문이라 이해할 수 있다.\n② 아간의 죄로 이스라엘이 아이성 점령에 실패한 것은 악인 한 사람으로 공동체가 패망할 수 있음을 보여준다.\n③ "나는 비천에 처할 줄도 알고 풍부에 처할 줄도 안다"는 바울의 고백과, 가난과 부를 언급한 아굴의 생각은 일치한다.\n④ 형제들이 요셉을 팔아버린 사건은 시기심이 자신과 가정을 병들게 함을 보여준다.\n⑤ 하만이 모르드개를 죽이려다 자신이 세운 나무에 매달려 죽은 사건은 악을 꾀하는 자가 스스로 화를 자초함을 보여준다.`,
@@ -190,16 +190,26 @@ const QUESTIONS = [
           `⑤ "함정을 파는 자는 그것에 빠질 것이요 돌을 굴리는 자는 도리어 그것에 치이리라"(잠언 26:27)`],
     src:`예성 탭 6번 · 성경퀴즈대회 문항 최종.md` },
 
-  { id:"50-3", tier:50, type:`릴레이 OX(5문항, 팀 협동)`,
-    q:`잠언 24장 17~18절("네 원수가 넘어질 때에 즐거워하지 말며... 여호와께서... 그의 진노를 그에게서 옮기실까 두려우니라")의 가르침에 비추어 옳게 행동했으면 O 잘못 행동했으면 X 릴레이 OX 퀴즈\n\n① 자신을 죽이려 한 원수 사울 왕의 전사 소식을 들은 다윗 (O, 애통해하며 금식함)\n② 니느웨에서 회개하라 전한 뒤 니느웨를 바라보는 요나 (X, 멸망하기를 바라다 혼남)\n③ 자신을 노예로 팔았던 형들을 다시 마주한 요셉 (O, 용서하며 위로함)\n④ 하루아침에 모든 소유를 잃고 친구들에게도 죄인 취급 받은 욥 (O, 입술로 범죄하지 않음을 고백함)\n⑤ 형제 국가인 남유다가 멸망하여 포로로 끌려가는 것을 바라보는 에돔 족속(X, 오바댜, 유다의 몰락을 기뻐하다 심판을 받음)`,
-    a:`① O  ② X  ③ O  ④ O  ⑤ X (원본 선지에 표기)`,
+  { id:"50-3", tier:50, type:`OX(5문항, 팀 협동)`,
+    q:`잠언 24장 17~18절("네 원수가 넘어질 때에 즐거워하지 말며... 여호와께서... 그의 진노를 그에게서 옮기실까 두려우니라")의 가르침에 비추어 옳게 행동했으면 O 잘못 행동했으면 X\n\n① 자신을 죽이려 한 원수 사울 왕의 전사 소식을 들은 다윗\n② 니느웨에서 회개하라 전한 뒤 니느웨를 바라보는 요나\n③ 자신을 노예로 팔았던 형들을 다시 마주한 요셉\n④ 하루아침에 모든 소유를 잃고 친구들에게도 죄인 취급 받은 욥\n⑤ 형제 국가인 남유다가 멸망하여 포로로 끌려가는 것을 바라보는 에돔 족속`,
+    a:`① O  ② X  ③ O  ④ O  ⑤ X`,
     coop:`배점: 최대 50점(맞춘 만큼 점수를 주는 방식 고려, 원본 운영 메모).`,
-    refs:[`잠언 24:17-18`],
+    refs:[`잠언 24:17-18`, `해설: ① O - 다윗은 원수 사울의 전사 소식에 애통해하며 금식함 ② X - 요나는 니느웨가 멸망하기를 바라다 하나님께 책망받음 ③ O - 요셉은 자신을 판 형들을 용서하며 위로함 ④ O - 욥은 모든 것을 잃고 죄인 취급을 받아도 입술로 범죄하지 않음 ⑤ X - 에돔 족속은 형제 나라 유다의 몰락을 기뻐하다 심판을 받음(오바댜)`],
     src:`혁준 탭 41번 · 성경퀴즈대회 문항 최종.md` },
 
-  { id:"50-4", tier:50, type:`(문제 형식 추후 확정)`,
-    q:`잠언과 속담 대응 퀴즈 — 문제 형식은 추후 직접 지정 예정. 우선 제목과 대응 쌍 목록만 자리 잡아 둠.`,
-    a:`(추후 확정)`,
+  { id:"50-4", tier:50, type:`속담 릴레이 퀴즈`,
+    q:`속담 릴레이 퀴즈`,
+    a:`세 살 버릇 여든까지 간다
+벼는 익을수록 고개를 숙인다
+가는 말이 고와야 오는 말이 곱다
+낮말은 새가 듣고 밤말은 쥐가 듣는다
+제 꾀에 제가 넘어간다`,
+    slides:[
+      { v:`마땅히 행할 길을 아이에게 가르치라 그리하면 늙어도 그것을 떠나지 아니하리라`, r:`잠언 22:6`, a:`세 살 버릇 여든까지 간다` },
+      { v:`교만이 오면 욕도 따라오거니와 겸손한 자에게는 지혜가 있느니라`, r:`잠언 11:2`, a:`벼는 익을수록 고개를 숙인다` },
+      { v:`유순한 대답은 분노를 쉬게 하여도 과격한 말은 노를 격동하느니라`, r:`잠언 15:1`, a:`가는 말이 고와야 오는 말이 곱다` },
+      { v:`두루 다니며 한담하는 자는 남의 비밀을 누설하나 마음이 신실한 자는 그런 것을 숨기느니라`, r:`잠언 11:13`, a:`낮말은 새가 듣고 밤말은 쥐가 듣는다` },
+      { v:`함정을 파는 자는 그것에 빠질 것이요 돌을 굴리는 자는 도리어 그것에 치이리라`, r:`잠언 26:27`, a:`제 꾀에 제가 넘어간다` }],
     refs:[`22:6 · 마땅히 행할 길을 아이에게 가르치라 그리하면 늙어도 그것을 떠나지 아니하리라 → 세 살 버릇 여든까지 간다`,
           `11:2 · 교만이 오면 욕도 따라오거니와 겸손한 자에게는 지혜가 있느니라 → 벼는 익을수록 고개를 숙인다`,
           `15:1 · 유순한 대답은 분노를 쉬게 하여도 과격한 말은 노를 격동하느니라 → 가는 말이 고와야 오는 말이 곱다`,
@@ -215,7 +225,7 @@ const QUESTIONS = [
     src:`예은 탭 11번 · 성경퀴즈대회 문항 최종.md` },
 
   { id:"50-6", tier:50, type:`빈칸 채우기`,
-    q:`잠언 6장 16~17절에서 여호와께서 미워하시는 것에 해당하는 말을 각 부위에서 하나씩 고르시오\n\n(선택지 예시) 교만한 눈 / 교활한 눈,  질투하는 혀 / 거짓된 혀,  무죄한 자의 피를 흘리는 손 / 무죄한 자의 목숨을 위협하는 손,  악으로 달려가는 발 / 죄로 달려가는 발`,
+    q:`잠언 6장 16~17절에서 여호와께서 미워하시는 것에 해당하는 말을 각 부위에서 하나씩 고르시오`,
     img:[`문항 이미지/50-6.png`],
     a:`교만한 눈, 거짓된 혀, 무죄한 자의 피를 흘리는 손, 악으로 달려가는 발`,
     refs:[`잠언 6:16-19`],
@@ -238,7 +248,7 @@ const LS_KEY = "bq2026";
 const DEFAULT_STATE = {
   names: ["1조","2조","3조","4조","5조","6조"],
   teamCount: 6,
-  solved: {}   // { "10-1": {team: 0} }
+  solved: {}   // { "10-1": [{team: 0, score: 10, ts: 169...}] } — 문항당 여러 조 동시 부여 가능
 };
 let state = loadState();
 
@@ -249,11 +259,20 @@ function loadState(){
     return normalizeState(raw);
   }catch(e){ return structuredClone(DEFAULT_STATE); }
 }
+function normalizeSolved(raw){
+  const out = {};
+  if(!raw || typeof raw !== "object") return out;
+  for(const [qid, v] of Object.entries(raw)){
+    if(Array.isArray(v)) out[qid] = v.filter(r => r && typeof r.team === "number");
+    else if(v && typeof v.team === "number") out[qid] = [v];   // 구버전(단일 조) 데이터 호환
+  }
+  return out;
+}
 function normalizeState(raw){
   return {
     names: Array.isArray(raw.names) && raw.names.length===6 ? raw.names : structuredClone(DEFAULT_STATE.names),
     teamCount: [2,3,4,5,6].includes(raw.teamCount) ? raw.teamCount : 6,
-    solved: raw.solved && typeof raw.solved==="object" ? raw.solved : {}
+    solved: normalizeSolved(raw.solved)
   };
 }
 function saveState(){
@@ -263,9 +282,10 @@ function saveState(){
 
 function teamScores(){
   const s = new Array(state.teamCount).fill(0);
-  for(const [qid,rec] of Object.entries(state.solved)){
+  for(const [qid,recs] of Object.entries(state.solved)){
     const q = QMAP[qid];
-    if(q && rec && rec.team < state.teamCount) s[rec.team] += (rec.score ?? q.tier);
+    if(!q) continue;
+    for(const rec of recs) if(rec.team < state.teamCount) s[rec.team] += (rec.score ?? q.tier);
   }
   return s;
 }
@@ -289,6 +309,7 @@ function render(){
   connectApi = null;
   closeModal();
   const route = parseHash();
+  if(route.name !== "question" || route.id !== slideQid) slideQid = null;
   renderSidebar(route);
   const app = document.getElementById("app");
   app.className = "content" + ((route.name === "scoreboard" || route.name === "settings") ? " scrollable" : "");
@@ -328,6 +349,7 @@ let connectApi = null;    // 연결형 문항이 화면에 있을 때 { setPairs
 let lastSentRoute = null;
 let lastToastTs;
 let dbConnected = false;
+let slideIdx = 0, slideQid = null;   // 슬라이드 문항(속담 릴레이) 현재 페이지
 
 function dbSet(path, val){
   if(!db) return;
@@ -343,7 +365,7 @@ function sendRoute(){
   const h = currentHash();
   if(h === lastSentRoute) return;
   lastSentRoute = h;
-  if(db) db.ref("bq2026/live").update({ route:h, answer:false, connect:null }).catch(() => {});
+  if(db) db.ref("bq2026/live").update({ route:h, answer:false, connect:null, slide:null }).catch(() => {});
 }
 function sendToast(msg){ dbSet("bq2026/live/toast", { msg, ts: Date.now() }); }
 
@@ -360,6 +382,11 @@ function applyLive(){
   } else {
     const rb = document.getElementById("revealBtn");
     if(rb) rb.textContent = live.answer ? "📢 공개 해제" : "📢 정답 공개";
+  }
+  if(q.slides && ROLE === "projection"){
+    const sl = live.slide;
+    const i = sl && sl.qid === route.id ? sl.i : 0;
+    if(i !== slideIdx) showSlide(q, i);
   }
   if(connectApi){
     const c = live.connect;
@@ -425,10 +452,10 @@ function viewGrid(){
     const qs = QUESTIONS.filter(q => q.tier === tier);
     const tiles = qs.map((q, r) => {
       const num = r * 5 + ti + 1;
-      const rec = state.solved[q.id];
-      if(rec && rec.team < state.teamCount){
-        return `<a class="qtile solved" href="#/q/${q.id}">
-          <span class="solvedtag">✓ ${esc(state.names[rec.team])} +${rec.score ?? q.tier}</span>
+      const recs = (state.solved[q.id] || []).filter(x => x.team < state.teamCount);
+      if(recs.length){
+        return `<a class="qtile solved${recs.length>1?" multi":""}" href="#/q/${q.id}">
+          ${recs.map(rec => `<span class="solvedtag">✓ ${esc(state.names[rec.team])} +${rec.score ?? q.tier}</span>`).join("")}
         </a>`;
       }
       return `<a class="qtile" href="#/q/${q.id}">
@@ -471,7 +498,7 @@ function viewQuestion(q){
   const idx = QUESTIONS.findIndex(x => x.id === q.id);
   const prev = idx > 0 ? QUESTIONS[idx-1] : null;
   const next = idx < QUESTIONS.length-1 ? QUESTIONS[idx+1] : null;
-  const rec = state.solved[q.id];
+  const recs = (state.solved[q.id] || []).filter(x => x.team < state.teamCount);
   const tierColor = `var(--t${q.tier})`;
 
   const coop = q.coop ? `<div class="coop-box"><b>협동 방식</b>\n${esc(q.coop)}</div>` : "";
@@ -484,14 +511,11 @@ function viewQuestion(q){
   const connectParsed = (q.type && q.type.includes("연결형")) ? parseConnectQ(q.q) : null;
   const isConnect = !!(connectParsed && connectParsed.left && connectParsed.right);
 
-  let solvedBanner = "";
-  if(rec && rec.team < state.teamCount){
-    solvedBanner = `<div class="solved-banner" style="background:${TEAM_COLORS[rec.team]}">
+  const solvedBanner = recs.map(rec => `<div class="solved-banner" style="background:${TEAM_COLORS[rec.team]}">
       ✓ ${esc(state.names[rec.team])} 정답 처리됨 (+${rec.score ?? q.tier}점)
-    </div>`;
-  }
+    </div>`).join("");
 
-  const awardBtn = (rec && rec.team < state.teamCount)
+  const awardBtn = recs.length
     ? `<button class="award-btn undo" id="awardBtn">정답 처리 취소 / 변경</button>`
     : `<button class="award-btn" id="awardBtn" style="background:${tierColor}">정답 처리 · 점수 부여</button>`;
 
@@ -512,7 +536,8 @@ function viewQuestion(q){
       </div>
 
       <div class="q-main">
-        ${isConnect ? renderConnectUI(connectParsed) : `<div class="q-text${q.q.length > 110 ? " long" : ""}">${renderQBlock(q.q)}</div>`}
+        ${q.slides ? `<div class="slide-box" id="slideBox"></div>`
+          : isConnect ? renderConnectUI(connectParsed) : `<div class="q-text${q.q.length > 110 ? " long" : ""}">${renderQBlock(q.q)}</div>`}
         ${imagesHtml}
       </div>
 
@@ -520,16 +545,21 @@ function viewQuestion(q){
       ${solvedBanner}
       ${ROLE === "presenter" ? `<div class="presenter-answer">
         <div class="pa-label">정답 <span>(발표자만 보임)</span></div>
-        <div class="pa-text">${esc(q.a)}</div>
+        <div class="pa-text" id="paText">${esc(q.a)}</div>
         ${q.refs.length ? `<div class="pa-refs">${q.refs.map(r => `<div>· ${esc(r)}</div>`).join("")}</div>` : ""}
         ${q.note ? `<div class="pa-note">${esc(q.note)}</div>` : ""}
+      </div>` : ""}
+      ${q.slides ? `<div class="slide-nav">
+        <button class="btn" id="slidePrev">◀ 이전</button>
+        <span id="slideCount"></span>
+        <button class="btn" id="slideNext">다음 ▶</button>
       </div>` : ""}
       <div class="answer-row">
         <button class="reveal-btn" id="revealBtn">${ROLE === "presenter" ? "📢 정답 공개" : "🔒 정답 보기"}</button>
         ${awardBtn}
       </div>
       <div class="kbd-hint">
-        <kbd>A</kbd> 정답 · <kbd>←</kbd> <kbd>→</kbd> 문항 이동
+        <kbd>A</kbd> 정답 · <kbd>←</kbd> <kbd>→</kbd> ${q.slides ? "구절 넘기기" : "문항 이동"}
       </div>
     </div>
   `;
@@ -537,7 +567,12 @@ function viewQuestion(q){
 
 function initQuestion(q){
   window.onresize = null;
-  if(q.type && q.type.includes("연결형")){
+  if(q.slides){
+    if(slideQid !== q.id){ slideQid = q.id; slideIdx = 0; }
+    showSlide(q, slideIdx);
+    document.getElementById("slidePrev").addEventListener("click", () => goSlide(q, slideIdx - 1));
+    document.getElementById("slideNext").addEventListener("click", () => goSlide(q, slideIdx + 1));
+  } else if(q.type && q.type.includes("연결형")){
     const parsed = parseConnectQ(q.q);
     if(parsed.left && parsed.right) initConnectUI(parsed);
   } else {
@@ -562,9 +597,40 @@ function initQuestion(q){
     if(e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
     if(e.key === "a" || e.key === "A"){ revealBtn.click(); }
     else if(e.key === "Escape"){ closeModal(); }
+    else if(q.slides && (e.key === "ArrowLeft" || e.key === "PageUp")){ goSlide(q, slideIdx - 1); }
+    else if(q.slides && (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ")){ e.preventDefault(); goSlide(q, slideIdx + 1); }
     else if(e.key === "ArrowLeft"){ const i = QUESTIONS.findIndex(x=>x.id===q.id); if(i>0) location.hash = "#/q/"+QUESTIONS[i-1].id; }
     else if(e.key === "ArrowRight"){ const i = QUESTIONS.findIndex(x=>x.id===q.id); if(i<QUESTIONS.length-1) location.hash = "#/q/"+QUESTIONS[i+1].id; }
   };
+}
+
+/* ============================================================
+   슬라이드 문항 — 1페이지 제목, 2페이지부터 구절 하나씩
+   ============================================================ */
+function curAnswer(q){
+  if(!q.slides) return q.a;
+  const s = q.slides[slideIdx - 1];
+  return s ? s.a : q.a;
+}
+function showSlide(q, i){
+  slideIdx = i;
+  const s = q.slides[i - 1];
+  const box = document.getElementById("slideBox");
+  if(box) box.innerHTML = s
+    ? `<div class="slide-verse">${esc(s.v)}</div><div class="slide-ref">${esc(s.r)}</div>`
+    : `<div class="slide-title">${esc(q.q)}</div>`;
+  const c = document.getElementById("slideCount");
+  if(c) c.textContent = `${i + 1} / ${q.slides.length + 1}`;
+  const pa = document.getElementById("paText");
+  if(pa) pa.textContent = curAnswer(q);
+  const at = document.querySelector(".answer-modal .atext");
+  if(at) at.textContent = curAnswer(q);
+}
+function goSlide(q, i){
+  if(i < 0 || i > q.slides.length || i === slideIdx) return;
+  closeModal();
+  showSlide(q, i);
+  if(ROLE === "presenter" && db) db.ref("bq2026/live").update({ slide:{ qid:q.id, i }, answer:false }).catch(() => {});
 }
 
 /* ============================================================
@@ -818,62 +884,83 @@ function fitConnectText(){
 /* ============================================================
    점수 부여 모달
    ============================================================ */
+let awardPick = { qid:null, score:null };   // 모달 세션 동안 마지막으로 고른 점수 기억
+
 function openAwardModal(q){
-  const rec = state.solved[q.id];
+  if(awardPick.qid !== q.id) awardPick = { qid:q.id, score:q.tier };
+  const recs = (state.solved[q.id] || []).filter(x => x.team < state.teamCount);
   const maxScore = q.tier;
   const scoreOptions = [];
   for(let s = maxScore; s >= 10; s -= 10) scoreOptions.push(s);
-  const defaultScore = (rec && scoreOptions.includes(rec.score)) ? rec.score : maxScore;
+  const chosenScore = scoreOptions.includes(awardPick.score) ? awardPick.score : maxScore;
 
   const scorePickHtml = scoreOptions.length > 1
     ? `<div class="score-pick" id="scorePick">
-        ${scoreOptions.map(s => `<button data-score="${s}" class="${s===defaultScore?"on":""}">${s}점</button>`).join("")}
+        ${scoreOptions.map(s => `<button data-score="${s}" class="${s===chosenScore?"on":""}">${s}점</button>`).join("")}
       </div>`
     : "";
 
-  const teamBtns = state.names.slice(0, state.teamCount).map((n,i) =>
-    `<button data-team="${i}" ${rec && rec.team===i ? 'style="outline:2px solid '+TEAM_COLORS[i]+';outline-offset:-1px"' : ""}>
-      <span class="dot" style="background:${TEAM_COLORS[i]}"></span>${esc(n)}
-    </button>`).join("");
+  const teamBtns = state.names.slice(0, state.teamCount).map((n,i) => {
+    const r = recs.find(x => x.team === i);
+    return `<button data-team="${i}" ${r ? 'style="outline:2px solid '+TEAM_COLORS[i]+';outline-offset:-1px"' : ""}>
+      <span class="dot" style="background:${TEAM_COLORS[i]}"></span>${esc(n)}${r ? ` <span class="team-pick-score">+${r.score}</span>` : ""}
+    </button>`;
+  }).join("");
 
-  const undo = rec ? `<button class="btn danger" id="mUndo">정답 처리 취소</button>` : "";
+  const undo = recs.length ? `<button class="btn danger" id="mUndo">전체 취소</button>` : "";
 
   document.getElementById("overlay").innerHTML = `
     <div class="modal-back" id="modalBack">
       <div class="modal">
         <h3>정답을 맞춘 조 선택</h3>
-        <p>문항 ${q.id} · 최대 ${maxScore}점${scoreOptions.length > 1 ? " — 점수를 고른 뒤 조를 선택하세요." : " — 조를 선택하면 부여됩니다."}</p>
+        <p>문항 ${q.id} · 최대 ${maxScore}점 — 여러 조를 동시에 선택할 수 있습니다. 이미 선택된 조를 다시 누르면 취소되고, 다른 점수를 고른 뒤 누르면 점수가 바뀝니다.</p>
         ${scorePickHtml}
         <div class="team-pick">${teamBtns}</div>
         <div class="modal-actions">
           ${undo}
-          <button class="btn" id="mCancel">닫기</button>
+          <button class="btn primary" id="mCancel">닫기</button>
         </div>
       </div>
     </div>`;
 
-  document.getElementById("modalBack").addEventListener("click", (e) => { if(e.target.id === "modalBack") closeModal(); });
-  document.getElementById("mCancel").addEventListener("click", closeModal);
+  document.getElementById("modalBack").addEventListener("click", (e) => { if(e.target.id === "modalBack") closeAwardModal(); });
+  document.getElementById("mCancel").addEventListener("click", closeAwardModal);
   const u = document.getElementById("mUndo");
   if(u) u.addEventListener("click", () => {
-    delete state.solved[q.id]; saveState(); closeModal(); render();
+    delete state.solved[q.id]; saveState();
     toast(`${q.id} 정답 처리 취소`);
     sendToast(`${q.id} 정답 처리 취소`);
+    closeAwardModal();
   });
   document.querySelectorAll(".score-pick button").forEach(b =>
     b.addEventListener("click", () => {
-      document.querySelectorAll(".score-pick button").forEach(x => x.classList.remove("on"));
-      b.classList.add("on");
+      awardPick.score = parseInt(b.dataset.score, 10);
+      openAwardModal(q);
     }));
   document.querySelectorAll(".team-pick button").forEach(b =>
     b.addEventListener("click", () => {
       const t = parseInt(b.dataset.team,10);
-      const chosen = parseInt(document.querySelector(".score-pick button.on")?.dataset.score, 10) || maxScore;
-      state.solved[q.id] = { team:t, score:chosen }; saveState(); closeModal(); render();
-      toast(`${esc(state.names[t])}  +${chosen}점`);
-      sendToast(`${esc(state.names[t])}  +${chosen}점`);
+      const list = state.solved[q.id] || [];
+      const idx = list.findIndex(x => x.team === t);
+      if(idx >= 0 && list[idx].score === chosenScore){
+        list.splice(idx, 1);
+        toast(`${esc(state.names[t])} 정답 처리 취소`);
+        sendToast(`${esc(state.names[t])} 정답 처리 취소`);
+      } else if(idx >= 0){
+        list[idx] = { team:t, score:chosenScore, ts:Date.now() };
+        toast(`${esc(state.names[t])}  ${chosenScore}점으로 수정`);
+        sendToast(`${esc(state.names[t])}  ${chosenScore}점으로 수정`);
+      } else {
+        list.push({ team:t, score:chosenScore, ts:Date.now() });
+        toast(`${esc(state.names[t])}  +${chosenScore}점`);
+        sendToast(`${esc(state.names[t])}  +${chosenScore}점`);
+      }
+      if(list.length) state.solved[q.id] = list; else delete state.solved[q.id];
+      saveState();
+      openAwardModal(q);
     }));
 }
+function closeAwardModal(){ awardPick = { qid:null, score:null }; closeModal(); render(); }
 function closeModal(){
   document.getElementById("overlay").innerHTML = "";
   const rb = document.getElementById("revealBtn");
@@ -888,7 +975,7 @@ function openAnswerModal(q, answerOnly){
     <div class="modal-back" id="ansBack">
       <div class="modal answer-modal">
         <div class="alabel">정답</div>
-        <div class="atext">${esc(q.a)}</div>
+        <div class="atext">${esc(curAnswer(q))}</div>
         ${answerOnly ? "" : `<div class="refs">${q.refs.map(r => `<div>· ${esc(r)}</div>`).join("")}</div>
         ${q.note ? `<div class="note">${esc(q.note)}</div>` : ""}
         <div class="modal-actions"><button class="btn" id="ansClose">닫기</button></div>`}
@@ -908,7 +995,7 @@ function viewScoreboard(){
   const rows = state.names.slice(0, state.teamCount).map((n,i) => ({ n, i, sc: scores[i] }));
   rows.sort((a,b) => b.sc - a.sc);
   const max = Math.max(10, ...scores);
-  const solvedCount = Object.keys(state.solved).filter(id => state.solved[id].team < state.teamCount).length;
+  const solvedCount = Object.keys(state.solved).filter(id => (state.solved[id]||[]).some(r => r.team < state.teamCount)).length;
 
   let rank = 0, prevScore = null;
   const list = rows.map((r, idx) => {
@@ -963,12 +1050,46 @@ function viewSettings(){
       </div>
     </div>
 
+    <div class="set-block log-block">
+      <h3>점수 부여 로그</h3>
+      <p class="hint">최근 부여 순으로 표시됩니다. 잘못 부여했다면 조·점수를 바꾸거나 삭제하세요.</p>
+      ${logRowsHtml()}
+    </div>
+
     <div class="set-block">
       <h3>진행 초기화</h3>
       <p class="hint">모든 문항의 정답 처리 기록과 점수를 지웁니다. 조 이름은 유지됩니다.</p>
       <button class="btn danger" id="resetProgress">점수 · 진행 상황 초기화</button>
     </div>
   `;
+}
+function scoreLog(){
+  const entries = [];
+  for(const [qid, recs] of Object.entries(state.solved)){
+    const q = QMAP[qid];
+    if(!q) continue;
+    recs.forEach((r,i) => { if(r.team < state.teamCount) entries.push({ qid, q, idx:i, team:r.team, score:r.score ?? q.tier, ts:r.ts||0 }); });
+  }
+  entries.sort((a,b) => b.ts - a.ts);
+  return entries;
+}
+function logRowsHtml(){
+  const entries = scoreLog();
+  if(!entries.length) return `<p class="hint">아직 부여된 점수가 없습니다.</p>`;
+  return `<div class="log-list" id="logList">${entries.map(e => {
+    const scoreOpts = [];
+    for(let s = e.q.tier; s >= 10; s -= 10) scoreOpts.push(s);
+    return `<div class="log-row" data-qid="${esc(e.qid)}" data-idx="${e.idx}">
+      <span class="log-qid">${esc(e.qid)}</span>
+      <select class="log-team">
+        ${state.names.slice(0, state.teamCount).map((n,i) => `<option value="${i}" ${i===e.team?"selected":""}>${esc(n)}</option>`).join("")}
+      </select>
+      <select class="log-score">
+        ${scoreOpts.map(s => `<option value="${s}" ${s===e.score?"selected":""}>${s}점</option>`).join("")}
+      </select>
+      <button class="btn danger log-del">삭제</button>
+    </div>`;
+  }).join("")}</div>`;
 }
 function initSettings(){
   document.querySelectorAll("#countBtns button").forEach(b =>
@@ -995,6 +1116,26 @@ function initSettings(){
       state.solved = {}; saveState(); render();
       toast("진행 상황을 초기화했습니다");
     }
+  });
+  document.querySelectorAll(".log-row").forEach(row => {
+    const qid = row.dataset.qid;
+    const idx = parseInt(row.dataset.idx, 10);
+    row.querySelector(".log-team").addEventListener("change", (e) => {
+      state.solved[qid][idx].team = parseInt(e.target.value, 10);
+      saveState(); render();
+      toast("점수 기록을 수정했습니다");
+    });
+    row.querySelector(".log-score").addEventListener("change", (e) => {
+      state.solved[qid][idx].score = parseInt(e.target.value, 10);
+      saveState(); render();
+      toast("점수 기록을 수정했습니다");
+    });
+    row.querySelector(".log-del").addEventListener("click", () => {
+      state.solved[qid].splice(idx, 1);
+      if(!state.solved[qid].length) delete state.solved[qid];
+      saveState(); render();
+      toast("점수 기록을 삭제했습니다");
+    });
   });
 }
 
