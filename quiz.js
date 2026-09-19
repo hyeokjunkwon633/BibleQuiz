@@ -918,7 +918,7 @@ function openAwardModal(q){
         <div class="team-pick">${teamBtns}</div>
         <div class="modal-actions">
           ${undo}
-          <button class="btn primary" id="mCancel">닫기</button>
+          <button class="btn primary confirm-btn" id="mCancel">확인</button>
         </div>
       </div>
     </div>`;

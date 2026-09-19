@@ -251,6 +251,7 @@
   .btn:hover{background:var(--hover)}
   .btn.primary{background:var(--text);color:#fff;border-color:var(--text)}
   .btn.danger{color:var(--t50);border-color:#f0c9c9}
+  .btn.confirm-btn{font-size:18px;padding:12px 36px;border-radius:8px}
   .btn.danger:hover{background:var(--t50bg)}
 
   /* ---------- modal ---------- */
