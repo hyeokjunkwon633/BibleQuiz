@@ -388,7 +388,7 @@ const QUESTIONS = [
 
   { id:"10-4", tier:10, type:`주관식 그림문제`,
     q:`다음 그림이 나타내는 사람은 어떤 사람인가?`,
-    img:[`문항 이미지/10-4.jpg`],
+    img:[`문항 이미지/10-4.jpg`], imgH:`60vh`,
     a:`게으른 자`,
     refs:[`잠언 20:4, 19:24 — 반복적으로 나오는 게으른 자에 대한 설명`],
     src:`혁준 탭 32번 · 성경퀴즈대회 문항 최종.md` },
@@ -726,7 +726,7 @@ function viewQuestion(q){
   const imagesHtml = (q.img && q.img.length)
     ? (q.img.length > 1
       ? `<div class="q-images multi" style="--n:${q.img.length}">${q.img.map((src, i) => `<figure><img src="${encodeURI(src)}" alt="${esc(q.id)} 그림 ${i+1}"><span class="img-num">${"①②③④⑤⑥⑦⑧⑨⑩"[i]}</span></figure>`).join("")}</div>`
-      : `<div class="q-images"><img src="${encodeURI(q.img[0])}" alt="${esc(q.id)} 그림"></div>`)
+      : `<div class="q-images"><img src="${encodeURI(q.img[0])}" alt="${esc(q.id)} 그림"${q.imgH ? ` style="max-height:${q.imgH}"` : ""}></div>`)
     : "";
 
   const connectParsed = (q.type && q.type.includes("연결형")) ? parseConnectQ(q.q) : null;
