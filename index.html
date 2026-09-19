@@ -816,7 +816,15 @@ function parseConnectQ(text){
   blocks.forEach(block => {
     const lines = block.split("\n").filter(l => l.trim());
     if(!lines.length) return;
-    if(lines.every(l => /^[①-⑩]/.test(l))){
+    if(/[ⓐ-ⓩ]/.test(block) && /[①-⑩㉠-㉭]/.test(block)){
+      // "① 좌 — ⓐ 우" 처럼 좌·우가 한 줄(또는 한 덩어리)에 섞인 형식
+      left = []; right = [];
+      const re = /([①-⑩㉠-㉭ⓐ-ⓩ])([^①-⑩㉠-㉭ⓐ-ⓩ]*)/g; let m;
+      while((m = re.exec(block))){
+        const item = { key:m[1], text:m[2].replace(/\s*[—–-]\s*$/, "").trim() };
+        (/[ⓐ-ⓩ]/.test(m[1]) ? right : left).push(item);
+      }
+    } else if(lines.every(l => /^[①-⑩]/.test(l))){
       left = lines.map(l => {
         const m = l.match(/^([①-⑩])\s*(.*)$/);
         return m ? { key:m[1], text:m[2] } : { key:l[0], text:l.slice(1).trim() };
