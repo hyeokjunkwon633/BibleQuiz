@@ -140,6 +140,7 @@
   }
   .q-text.long{font-size:clamp(19px,2.3vw,28px);line-height:1.55}
   .q-choices{display:block;text-align:left;margin-top:.6em}
+  .q-choice-item{padding-left:1.3em;text-indent:-1.3em;margin:.28em 0}
   .q-explain{flex-shrink:0;max-height:24vh;overflow:auto;margin-top:8px;display:flex;flex-direction:column;gap:6px}
   .coop-box{
     border-left:3px solid var(--t40);background:var(--t40bg);border-radius:0 8px 8px 0;
@@ -386,7 +387,7 @@ const QUESTIONS = [
     src:`혁준 탭 32번 · 성경퀴즈대회 문항 최종.md` },
 
   { id:"10-5", tier:10, type:`5지선다`,
-    q:`잠언 9장에서 지혜가 마련한 집 기둥의 개수는?\n\n①4개     ②5개   ③7개   ④12개 ⑤100개`,
+    q:`잠언 9장에서 지혜가 마련한 집 기둥의 개수는?\n\n①4개\n②5개\n③7개\n④12개\n⑤100개`,
     a:`③`,
     refs:[`잠언 9:1 "지혜가 그의 집을 짓고 일곱 기둥을 다듬고"`],
     src:`은아 탭 44번 · 성경퀴즈대회 문항 최종.md` },
@@ -406,13 +407,13 @@ const QUESTIONS = [
     src:`예은 탭 1번 · 성경퀴즈대회 문항 최종.md` },
 
   { id:"20-2", tier:20, type:`5지선다`,
-    q:`잠언에 나오는 '면류관'에 대한 내용 중 아닌 것은?\n\n① 영화의 면류관② 생명의 면류관③ 지식의 면류관④ 노인의 면류관⑤ 지아비의 면류관`,
+    q:`잠언에 나오는 '면류관'에 대한 내용 중 아닌 것은?\n\n① 영화의 면류관\n② 생명의 면류관\n③ 지식의 면류관\n④ 노인의 면류관\n⑤ 지아비의 면류관`,
     a:`② 생명의 면류관 (잠언에는 없고 야고보서 1:12, 요한계시록 2:10 등에 나옴)`,
     refs:[`16:31 영화의 면류관`, `17:6 노인의 면류관`, `14:18 지식의 면류관`, `12:4 지아비의 면류관`],
     src:`예은 탭 8번 · 성경퀴즈대회 문항 최종.md` },
 
   { id:"20-3", tier:20, type:`5지선다(빈칸 채우기)`,
-    q:`"정녕히 재물은 스스로 날개를 내어 하늘을 나는 (      )처럼 날아가리라"(23:5)에서 저자가 왜 하필 이 대상에 빗대었는지 생각할 때, 빈칸에 들어갈 말로 가장 알맞은 것은?\n\n①비둘기          ②참새             ③독수리          ④닭                ⑤메추라기`,
+    q:`"정녕히 재물은 스스로 날개를 내어 하늘을 나는 (      )처럼 날아가리라"(23:5)에서 저자가 왜 하필 이 대상에 빗대었는지 생각할 때, 빈칸에 들어갈 말로 가장 알맞은 것은?\n\n①비둘기\n②참새\n③독수리\n④닭\n⑤메추라기`,
     a:`③독수리`,
     refs:[`잠언 23:5`, `해설: 그림 퀴즈로 재미있게 접근하면 어떨까...?`],
     src:`혁준 탭 40번 · 성경퀴즈대회 문항 최종.md` },
@@ -446,7 +447,7 @@ const QUESTIONS = [
     src:`예은 탭 3번 · 성경퀴즈대회 문항 최종.md` },
 
   { id:"30-2", tier:30, type:`4지선다`,
-    q:`잠언 15장의 말씀에 비추어 볼 때, 부적절 한 삶의 모습에 해당하지 않는 것은?\n\n① 재물을 많이 소유한 것② 자신의 감정을 즉시 표현하는 것③ 준비될 때까지 행동을 미루는 것④ 다른 사람의 의견보다 자신의 판단을 우선하는 것`,
+    q:`잠언 15장의 말씀에 비추어 볼 때, 부적절 한 삶의 모습에 해당하지 않는 것은?\n\n① 재물을 많이 소유한 것\n② 자신의 감정을 즉시 표현하는 것\n③ 준비될 때까지 행동을 미루는 것\n④ 다른 사람의 의견보다 자신의 판단을 우선하는 것`,
     a:`1`,
     refs:[`가산이 적어도 여호와를 경외하는 것이 크게 부하고 (15:16)`,
           `1. 재물을 사랑하는 마음이 해로운 것임. 가산이 적은 게 잘하는 것도 아니고, 재물이 많은 게 죄라는 것도 아님. 그러나 재물은 인생을 번뇌케한다.`,
@@ -454,13 +455,13 @@ const QUESTIONS = [
     src:`예은 탭 5번 · 성경퀴즈대회 문항 최종.md` },
 
   { id:"30-3", tier:30, type:`5지선다`,
-    q:`잠언 25장 3절(하늘의 높음과 땅의 깊음 같이 왕의 마음은 헤아릴 수 없느니라)와 이사야 43장 18~19절(너희는 이전 일을 기억하지 말며…보라 내가 새 일을 행하리니)의 공통점으로 알맞은 것은?\n\n① 인간의 어리석음을 꾸짖고 있다② 하나님은 보이지 않아도 일하신다③ 왕의 변덕스러움과 대비되는 하나님의 전지전능하심을 나타낸다④ 사람이 현재의 상황만으로 앞으로 일어날 일을 판단해서는 안 된다고 말한다.\n⑤ 인간이 이해할 수 없는 모든 일은 하나님의 뜻으로 받아들여야 한다고 가르친다.`,
+    q:`잠언 25장 3절(하늘의 높음과 땅의 깊음 같이 왕의 마음은 헤아릴 수 없느니라)와 이사야 43장 18~19절(너희는 이전 일을 기억하지 말며…보라 내가 새 일을 행하리니)의 공통점으로 알맞은 것은?\n\n① 인간의 어리석음을 꾸짖고 있다\n② 하나님은 보이지 않아도 일하신다\n③ 왕의 변덕스러움과 대비되는 하나님의 전지전능하심을 나타낸다\n④ 사람이 현재의 상황만으로 앞으로 일어날 일을 판단해서는 안 된다고 말한다.\n⑤ 인간이 이해할 수 없는 모든 일은 하나님의 뜻으로 받아들여야 한다고 가르친다.`,
     a:`②`,
     refs:[`잠언 25장 3절`, `이사야 43장 18~19절`, `해설: 두 구절 모두 우리가 인지하지 못해도 살아서 일하고 계시는 하나님에 대해 이야기 하고 있으며, 따라서 우린 그분의 일하심을 의심하지 말 것을 권면한다.`],
     src:`예성 탭 1번 · 성경퀴즈대회 문항 최종.md` },
 
   { id:"30-4", tier:30, type:`객관식(정답 2개)`,
-    q:`26장 1~16절은 우리가 인생에서 멀리해야 하는 인물에 대해 가르치고 있습니다.\n이때 우리가 멀리해야 하는 사람의 특징으로 잘못된 것은? (정답 2개)\n\n① 미련한 자는 능력이 부족하여 영예를 얻기에 합당하지 않다(잠 26:1)\n② 미련한 자는 귀가 좋지 않아 남의 말을 잘 듣지 못 한다③ 미련한 자와 스스로를 지혜롭게 여기는 사람은 똑같이 해롭다 (26:12)\n④ 게으른 자는 나태하여 문제 발생시 원인을 찾는 것조차 귀찮아 한다(26:13)\n⑤ 게으른 자는 스스로를 지혜롭게 여기는 사람이다.(잠 26:16)\n⑥ 사람은 악하여 분란 일으키는 사람을 쫓아내도 또 다른 이가 등장한다(잠 26:20)\n⑦ 마음이 악한 사람은 겉으로도 그 악함이 드러난다(잠 26:23~25)\n⑧ 악한 사람은 자신의 악함으로 인해 결국 패망한다. (잠 26:27~28)`,
+    q:`26장 1~16절은 우리가 인생에서 멀리해야 하는 인물에 대해 가르치고 있습니다.\n이때 우리가 멀리해야 하는 사람의 특징으로 잘못된 것은? (정답 2개)\n\n① 미련한 자는 능력이 부족하여 영예를 얻기에 합당하지 않다(잠 26:1)\n② 미련한 자는 귀가 좋지 않아 남의 말을 잘 듣지 못 한다\n③ 미련한 자와 스스로를 지혜롭게 여기는 사람은 똑같이 해롭다 (26:12)\n④ 게으른 자는 나태하여 문제 발생시 원인을 찾는 것조차 귀찮아 한다(26:13)\n⑤ 게으른 자는 스스로를 지혜롭게 여기는 사람이다.(잠 26:16)\n⑥ 사람은 악하여 분란 일으키는 사람을 쫓아내도 또 다른 이가 등장한다(잠 26:20)\n⑦ 마음이 악한 사람은 겉으로도 그 악함이 드러난다(잠 26:23~25)\n⑧ 악한 사람은 자신의 악함으로 인해 결국 패망한다. (잠 26:27~28)`,
     a:`⑤, ⑧`,
     refs:[`잠언 26장 16절`],
     src:`예성 탭 3번 · 성경퀴즈대회 문항 최종.md` },
@@ -770,6 +771,9 @@ function initQuestion(q){
   if(q.type && q.type.includes("연결형")){
     const parsed = parseConnectQ(q.q);
     if(parsed.left && parsed.right) initConnectUI(parsed);
+  } else {
+    fitQuestionText();
+    window.onresize = fitQuestionText;
   }
 
   /* ---- 정답 공개 (중앙 팝업, DOM에 미리 넣지 않음) ---- */
@@ -797,6 +801,25 @@ function initQuestion(q){
    ============================================================ */
 const CONNECT_COLORS = ["#2383e2","#0f9d58","#d9730d","#9333ea","#e03e3e","#0d9488","#c2185b"];
 
+// F11 전체화면 등 어떤 해상도에서도 스크롤 없이 문제+선지가 한 화면에 들어오도록
+// .q-main이 넘치면 .q-text 글자 크기를 조금씩 줄여서 맞춘다.
+function fitQuestionText(){
+  const qmain = document.querySelector(".q-main");
+  const qtext = document.querySelector(".q-text");
+  if(!qmain || !qtext) return;
+  qtext.style.fontSize = "";
+  requestAnimationFrame(() => {
+    let size = parseFloat(getComputedStyle(qtext).fontSize);
+    const minSize = 14;
+    let guard = 0;
+    while(qmain.scrollHeight > qmain.clientHeight + 1 && size > minSize && guard < 60){
+      size -= 1;
+      qtext.style.fontSize = size + "px";
+      guard++;
+    }
+  });
+}
+
 // q.q 텍스트에서 마지막 블록이 ①②③④... 선지 목록이면 좌측정렬 블록으로 분리
 function renderQBlock(text){
   const blocks = String(text).split(/\n\n+/);
@@ -804,7 +827,8 @@ function renderQBlock(text){
   const lines = last.split("\n").filter(l => l.trim());
   if(blocks.length > 1 && lines.length && lines.every(l => /^[①-⑩]/.test(l))){
     const intro = blocks.slice(0,-1).join("\n\n");
-    return `${esc(intro)}<div class="q-choices">${esc(lines.join("\n"))}</div>`;
+    const choicesHtml = lines.map(l => `<div class="q-choice-item">${esc(l)}</div>`).join("");
+    return `${esc(intro)}<div class="q-choices">${choicesHtml}</div>`;
   }
   return esc(text);
 }
@@ -981,8 +1005,25 @@ function initConnectUI(parsed){
     redraw();
   });
 
-  window.onresize = redraw;
+  fitConnectText();
+  window.onresize = () => { fitConnectText(); redraw(); };
   requestAnimationFrame(redraw);
+}
+
+// F11 전체화면 등에서 연결형 문항의 설명 텍스트가 길어 넘칠 때 글자 크기를 줄여 스크롤 없이 맞춘다.
+function fitConnectText(){
+  const qmain = document.querySelector(".q-main");
+  const intro = document.querySelector(".connect-intro");
+  if(!qmain || !intro) return;
+  intro.style.fontSize = "";
+  let size = parseFloat(getComputedStyle(intro).fontSize);
+  const minSize = 14;
+  let guard = 0;
+  while(qmain.scrollHeight > qmain.clientHeight + 1 && size > minSize && guard < 60){
+    size -= 1;
+    intro.style.fontSize = size + "px";
+    guard++;
+  }
 }
 
 /* ============================================================
