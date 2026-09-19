@@ -346,3 +346,4 @@
 
   body.projection #sidebar, body.projection #app, body.projection #overlay{pointer-events:none}
   body.projection #app .connect-item, body.projection #app .connect-reset{pointer-events:auto}
+  body.projection #sidebar, body.projection .q-top, body.projection .answer-row, body.projection .kbd-hint{display:none}
