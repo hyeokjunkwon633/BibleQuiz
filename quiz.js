@@ -312,11 +312,14 @@ function render(){
   closeModal();
   const route = parseHash();
   if(route.name !== "question" || route.id !== slideQid) slideQid = null;
+  if(route.name !== "question") timerQid = null;
   renderSidebar(route);
   const app = document.getElementById("app");
   app.className = "content" + ((route.name === "scoreboard" || route.name === "settings") ? " scrollable" : "");
   if(route.name === "question"){
     if(!QMAP[route.id]){ location.hash = "#/"; return; }
+    if(ROLE === "standalone" && route.id !== timerQid) timer = { endAt:null, left:TIMER_MS };
+    timerQid = route.id;
     app.innerHTML = viewQuestion(QMAP[route.id]);
     initQuestion(QMAP[route.id]);
     initTimer();
@@ -356,6 +359,7 @@ let slideIdx = 0, slideQid = null;   // 슬라이드 문항(속담 릴레이) �
 const TIMER_MS = 60000;              // 우측 상단 타이머 기본 1분
 let timer = { endAt:null, left:TIMER_MS };
 let serverOffset = 0;
+let timerQid = null;   // standalone: 문항이 바뀔 때만 타이머 초기화
 
 function dbSet(path, val){
   if(!db) return;
@@ -371,7 +375,9 @@ function sendRoute(){
   const h = currentHash();
   if(h === lastSentRoute) return;
   lastSentRoute = h;
-  if(db) db.ref("bq2026/live").update({ route:h, answer:false, connect:null, slide:null }).catch(() => {});
+  const upd = { route:h, answer:false, connect:null, slide:null };
+  if(parseHash().name === "question") upd.timer = { endAt:null, left:TIMER_MS };   // 문항 진입 시 1분으로 초기화
+  if(db) db.ref("bq2026/live").update(upd).catch(() => {});
 }
 function sendToast(msg){ dbSet("bq2026/live/toast", { msg, ts: Date.now() }); }
 
