@@ -208,6 +208,7 @@
   .answer-modal .atext{font-size:clamp(24px,3vw,34px);font-weight:800;margin:8px 0 16px;white-space:pre-wrap;line-height:1.45}
   .answer-modal .refs{font-size:14px;color:#555;line-height:1.7;text-align:left;background:var(--hover);border-radius:8px;padding:10px 14px}
   .answer-modal .refs div{padding:2px 0}
+  .answer-modal .verses{font-size:18px;line-height:1.6;text-align:left;margin-bottom:10px;display:flex;flex-direction:column;gap:6px}
   .answer-modal .note{margin-top:10px;font-size:12.5px;color:var(--text-muted);white-space:pre-wrap;text-align:left}
   .answer-modal .modal-actions{justify-content:center;margin-top:16px}
 
