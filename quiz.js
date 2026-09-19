@@ -457,10 +457,14 @@ function setTimer(t){
   if(ROLE === "standalone" || !db){ timer = t; drawTimer(); }
   else dbSet("bq2026/live/timer", t);
 }
+let prevMs = null;
 function drawTimer(){
+  const ms = timerLeft();
+  if(ROLE === "projection" && timer.endAt && prevMs > 0 && ms === 0) playEndSound();
+  prevMs = ms;
   const el = document.getElementById("timer");
   if(!el) return;
-  const ms = timerLeft(), s = Math.ceil(ms / 1000);
+  const s = Math.ceil(ms / 1000);
   const disp = document.getElementById("timerDisp");
   if(disp) disp.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
   const running = !!timer.endAt && ms > 0;
@@ -488,6 +492,28 @@ function initTimer(){
   drawTimer();
 }
 setInterval(drawTimer, 200);
+
+// 종료음 (프로젝션만) — 브라우저 정책상 화면을 한 번 클릭/키 입력해야 소리가 켜짐
+let audioCtx = null;
+function unlockAudio(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if(audioCtx.state === "suspended") audioCtx.resume();
+}
+if(ROLE === "projection") ["pointerdown","keydown"].forEach(ev => document.addEventListener(ev, unlockAudio));
+function playEndSound(){
+  if(!audioCtx) return;
+  const t0 = audioCtx.currentTime;
+  [0, 0.35, 0.7].forEach((d, i) => {
+    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    o.type = "square";
+    o.frequency.value = i < 2 ? 880 : 660;
+    const len = i < 2 ? 0.25 : 0.9;
+    g.gain.setValueAtTime(0.25, t0 + d);
+    g.gain.exponentialRampToValueAtTime(0.001, t0 + d + len);
+    o.connect(g).connect(audioCtx.destination);
+    o.start(t0 + d); o.stop(t0 + d + len);
+  });
+}
 
 function renderSidebar(route){
   const items = [
@@ -577,13 +603,13 @@ function viewQuestion(q){
     <div class="qpage">
       <div class="q-top">
         <a class="q-back" href="#/">← 문항 선택으로</a>
-        <div class="timer" id="timer"></div>
       </div>
 
       <div class="q-meta">
         <span class="q-badge tier" style="background:${tierColor}">${q.tier}점</span>
         <span class="q-badge type">${esc(q.type)}</span>
         <span class="q-badge type" style="background:transparent;color:var(--text-muted)">문항 ${q.id}</span>
+        <div class="timer" id="timer"></div>
       </div>
 
       <div class="q-main">

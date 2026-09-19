@@ -39,10 +39,10 @@
   .topbar .left{font-weight:700;font-size:15px;letter-spacing:-.01em}
   .topbar .right{font-size:13px;color:var(--text-muted)}
   .timer{display:flex;align-items:center;gap:8px;margin-left:auto}
-  .timer-disp{font-size:clamp(36px,5vw,64px);line-height:1;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text);letter-spacing:.01em}
+  .timer-disp{font-size:clamp(25px,3.5vw,45px);line-height:1;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text);letter-spacing:.01em}
   .timer.idle .timer-disp{color:var(--text-muted)}
   .timer.warn .timer-disp{color:#e03e3e}
-  .timer .tbtn{border:1px solid var(--border);background:var(--bg);border-radius:8px;width:44px;height:44px;font-size:18px;color:var(--text);padding:0}
+  .timer .tbtn{border:1px solid var(--border);background:var(--bg);border-radius:6px;width:31px;height:31px;font-size:13px;color:var(--text);padding:0}
   .timer .tbtn:hover{background:var(--hover)}
 
   /* ---------- shell ---------- */
@@ -362,4 +362,4 @@
 
   body.projection #sidebar, body.projection #app, body.projection #overlay{pointer-events:none}
   body.projection #app .connect-item, body.projection #app .connect-reset{pointer-events:auto}
-  body.projection #sidebar, body.projection .q-back, body.projection .answer-row, body.projection .kbd-hint, body.projection .slide-nav{display:none}
+  body.projection #sidebar, body.projection .q-top, body.projection .answer-row, body.projection .kbd-hint, body.projection .slide-nav{display:none}
