@@ -352,6 +352,9 @@ let lastSentRoute = null;
 let lastToastTs;
 let dbConnected = false;
 let slideIdx = 0, slideQid = null;   // 슬라이드 문항(속담 릴레이) 현재 페이지
+const TIMER_MS = 60000;              // 우측 상단 타이머 기본 1분
+let timer = { endAt:null, left:TIMER_MS };
+let serverOffset = 0;
 
 function dbSet(path, val){
   if(!db) return;
@@ -412,8 +415,12 @@ function initSync(){
     render();
   });
 
+  db.ref(".info/serverTimeOffset").on("value", snap => { serverOffset = snap.val() || 0; });
+
   db.ref("bq2026/live").on("value", snap => {
     live = snap.val() || {};
+    timer = live.timer ? { endAt: live.timer.endAt ?? null, left: live.timer.left ?? TIMER_MS } : { endAt:null, left:TIMER_MS };
+    drawTimer();
     if(ROLE === "projection"){
       const t = live.toast;
       if(t && lastToastTs !== undefined && t.ts !== lastToastTs) toast(t.msg);
@@ -438,6 +445,49 @@ function initSync(){
   }
 }
 initSync();
+
+/* ============================================================
+   타이머 (우측 상단) — bq2026/live/timer { endAt, left }
+   ============================================================ */
+function timerLeft(){
+  return timer.endAt ? Math.max(0, timer.endAt - (Date.now() + serverOffset)) : timer.left;
+}
+function setTimer(t){
+  if(ROLE === "standalone" || !db){ timer = t; drawTimer(); }
+  else dbSet("bq2026/live/timer", t);
+}
+function drawTimer(){
+  const el = document.getElementById("timer");
+  if(!el) return;
+  const ms = timerLeft(), s = Math.ceil(ms / 1000);
+  const disp = document.getElementById("timerDisp");
+  if(disp) disp.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+  const running = !!timer.endAt && ms > 0;
+  el.classList.toggle("idle", !running && ms >= TIMER_MS);
+  el.classList.toggle("warn", s <= 10);
+  const tb = document.getElementById("timerToggle");
+  if(tb) tb.textContent = running ? "⏸" : "▶";
+}
+function initTimer(){
+  const el = document.getElementById("timer");
+  if(!el) return;
+  el.innerHTML = `<span class="timer-disp" id="timerDisp"></span>` + (ROLE === "projection" ? "" :
+    `<button class="tbtn" id="timerToggle" title="시작/정지"></button><button class="tbtn" id="timerReset" title="1분으로 리셋">↺</button>`);
+  if(ROLE !== "projection"){
+    document.getElementById("timerToggle").addEventListener("click", () => {
+      const ms = timerLeft();
+      if(timer.endAt && ms > 0) setTimer({ endAt:null, left:ms });
+      else{
+        const left = ms > 0 ? ms : TIMER_MS;
+        setTimer({ endAt: Date.now() + serverOffset + left, left });
+      }
+    });
+    document.getElementById("timerReset").addEventListener("click", () => setTimer({ endAt:null, left:TIMER_MS }));
+  }
+  drawTimer();
+  setInterval(drawTimer, 200);
+}
+initTimer();
 
 function renderSidebar(route){
   const items = [
