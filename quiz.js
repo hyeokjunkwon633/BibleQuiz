@@ -407,7 +407,7 @@ function applyLive(){
     const rb = document.getElementById("revealBtn");
     if(rb) rb.textContent = live.answer ? "📢 공개 해제" : "📢 정답 공개";
   }
-  if(q.slides){
+  if(q.slides && ROLE === "projection"){
     const sl = live.slide;
     const i = sl && sl.qid === route.id ? sl.i : 0;
     if(i !== slideIdx) showSlide(q, i);
@@ -445,11 +445,6 @@ function initSync(){
       if(t && lastToastTs !== undefined && t.ts !== lastToastTs) toast(t.msg);
       lastToastTs = t ? t.ts : null;
       if(live.route && live.route !== currentHash()){ location.hash = live.route; return; }
-    }
-    // 다른 발표자 화면이 이동하면 따라감 (설정 편집 중엔 제외)
-    if(ROLE === "presenter" && live.route && live.route !== lastSentRoute && parseHash().name !== "settings"){
-      lastSentRoute = live.route;
-      if(live.route !== currentHash()){ location.hash = live.route; return; }
     }
     applyLive();
   });
